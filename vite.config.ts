@@ -11,6 +11,12 @@ import { playwright } from '@vitest/browser-playwright'
 const dirname =
   typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url))
 
+const storybookPlugins = process.env.VITEST
+  ? await storybookTest({
+      configDir: path.join(dirname, '.storybook'),
+    })
+  : []
+
 export default defineConfig(() => {
   const isStorybook = process.env.STORYBOOK === 'true'
 
@@ -24,12 +30,8 @@ export default defineConfig(() => {
     test: {
       projects: [
         {
-          extends: true,
-          plugins: [
-            storybookTest({
-              configDir: path.join(dirname, '.storybook'),
-            }),
-          ],
+          extends: true as const,
+          plugins: storybookPlugins,
           test: {
             name: 'storybook',
             browser: {
@@ -38,7 +40,7 @@ export default defineConfig(() => {
               provider: playwright({}),
               instances: [
                 {
-                  browser: 'chromium',
+                  browser: 'chromium' as const,
                 },
               ],
             },
