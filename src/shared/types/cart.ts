@@ -7,3 +7,11 @@ export interface Cart {
   userId: number
   products: Product[]
 }
+
+export interface CartProduct extends Product {
+  quantity: number
+}
+
+export interface CartWithQuantity extends Cart {
+  products: CartProduct[]
+}
