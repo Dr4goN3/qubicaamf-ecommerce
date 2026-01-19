@@ -69,3 +69,9 @@ ol {
   padding-left: var(--container-padding);
   padding-right: var(--container-padding);
 }
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
