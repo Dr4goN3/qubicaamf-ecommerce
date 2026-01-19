@@ -1,3 +1,5 @@
+@use './breakpoints' as *;
+
 :root {
   --bg: #ffffff;
   --surface: #ffffff;
@@ -48,9 +50,9 @@
   --container-max: 1280px;
   --container-padding: var(--space-4);
 
-  --breakpoint-mobile: 640px;
-  --breakpoint-tablet: 768px;
-  --breakpoint-desktop: 1024px;
+  --breakpoint-mobile: #{$breakpoint-mobile};
+  --breakpoint-tablet: #{$breakpoint-tablet};
+  --breakpoint-desktop: #{$breakpoint-desktop};
 }
 
 // Dark theme overrides
