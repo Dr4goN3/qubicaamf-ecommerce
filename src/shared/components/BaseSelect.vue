@@ -75,13 +75,23 @@ const selectClasses = computed(() => [
   padding-left: 0;
   padding-right: 0;
   color: var(--info, #0ea5e9);
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 1px;
+  transition: background-size var(--transition-fast), border-color var(--transition-fast),
+    color var(--transition-fast);
 
   &:hover:not(:disabled) {
-    border-bottom-color: var(--border-hover);
+    border-bottom-color: transparent;
+    background-size: 100% 1px;
   }
 
   &:focus-visible {
     @include focus-ring;
+    border-bottom-color: transparent;
+    background-size: 100% 1px;
   }
 }
 </style>
