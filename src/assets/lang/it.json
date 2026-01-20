@@ -1,1 +1,19 @@
-{}
+{
+  "header": {
+    "wishlist": "Preferiti",
+    "cart": "Carrello",
+    "login": "Login",
+    "logout": "Logout",
+    "settings": "Impostazioni",
+    "languageLabel": "Lingua",
+    "themeLabel": "Tema",
+    "theme": {
+      "light": "Chiaro",
+      "dark": "Scuro"
+    },
+    "language": {
+      "it": "Italiano",
+      "en": "Inglese"
+    }
+  }
+}
