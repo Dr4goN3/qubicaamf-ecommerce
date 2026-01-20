@@ -46,6 +46,9 @@
   // Focus ring
   --focus-ring: 0 0 0 3px rgba(8, 47, 109, 0.5);
 
+  // Transitions
+  --transition-fast: 280ms ease;
+
   // Layout
   --container-max: 1280px;
   --container-padding: var(--space-4);
