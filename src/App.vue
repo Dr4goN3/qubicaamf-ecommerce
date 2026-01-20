@@ -1,7 +1,15 @@
 <script setup lang="ts"></script>
 
 <template>
-  <router-view />
+  <div class="app-container content-wrapper">
+    <router-view />
+  </div>
 </template>
 
-<style scoped></style>
+<style lang="scss">
+  .app-container {
+    padding-top: var(--space-6);
+    padding-bottom: var(--space-6);
+    min-height: 100vh;
+  }
+</style>
