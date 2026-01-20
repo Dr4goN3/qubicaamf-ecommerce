@@ -67,4 +67,9 @@ const buttonClasses = computed(() => [
   background: var(--danger);
   color: var(--danger-contrast, #fff);
 }
+
+.base-button--success {
+  background: var(--success);
+  color: var(--success-contrast, #fff);
+}
 </style>
