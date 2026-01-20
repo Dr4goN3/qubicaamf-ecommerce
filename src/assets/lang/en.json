@@ -1,1 +1,19 @@
-{}
+{
+  "header": {
+    "wishlist": "Wishlist",
+    "cart": "Cart",
+    "login": "Login",
+    "logout": "Logout",
+    "settings": "Settings",
+    "languageLabel": "Language",
+    "themeLabel": "Theme",
+    "theme": {
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "language": {
+      "it": "Italian",
+      "en": "English"
+    }
+  }
+}
