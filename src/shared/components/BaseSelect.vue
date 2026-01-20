@@ -27,6 +27,7 @@ import type { SelectProps, SelectValue } from '@/shared/types/ui-kit/select'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SelectProps>(), {
+  variant: 'default',
   size: 'md',
   disabled: false,
   required: false,
@@ -35,7 +36,11 @@ const props = withDefaults(defineProps<SelectProps>(), {
 
 const model = defineModel<SelectValue | ''>({ default: '' })
 
-const selectClasses = computed(() => ['base-select', `base-select--${props.size}`])
+const selectClasses = computed(() => [
+  'base-select',
+  `base-select--${props.size}`,
+  `base-select--${props.variant}`,
+])
 </script>
 
 <style scoped lang="scss">
@@ -60,5 +65,23 @@ const selectClasses = computed(() => ['base-select', `base-select--${props.size}
   }
 
   @include input-sizes;
+}
+
+.base-select--line {
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+  padding-left: 0;
+  padding-right: 0;
+  color: var(--info, #0ea5e9);
+
+  &:hover:not(:disabled) {
+    border-bottom-color: var(--border-hover);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
 }
 </style>

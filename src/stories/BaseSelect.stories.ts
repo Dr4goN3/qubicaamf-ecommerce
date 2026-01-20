@@ -7,6 +7,10 @@ const meta = {
   component: BaseSelect,
   tags: ['autodocs'],
   argTypes: {
+    variant: {
+      control: 'select',
+      options: ['default', 'line'],
+    },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
@@ -22,6 +26,7 @@ const meta = {
     },
   },
   args: {
+    variant: 'default',
     size: 'md',
     disabled: false,
     required: false,
