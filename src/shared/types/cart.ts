@@ -1,9 +1,9 @@
 import type { Product } from './product'
 
-export type ProductId = number
+export type CartId = number
 
 export interface Cart {
-  id: ProductId
+  id: CartId
   userId: number
   products: Product[]
 }
