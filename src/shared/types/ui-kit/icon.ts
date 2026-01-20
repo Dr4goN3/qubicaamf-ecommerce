@@ -1,4 +1,4 @@
-export type IconName = 'cart' | 'fav' | 'login' | 'logout'
+export type IconName = 'cart' | 'fav' | 'login' | 'logout' | 'light' | 'dark' | 'settings'
 export type IconSize = string | number
 
 export interface IconProps {
