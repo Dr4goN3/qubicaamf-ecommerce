@@ -1,5 +1,10 @@
 export type ProductId = number
 
+export interface ProductRating {
+  rate: number
+  count: number
+}
+
 export interface Product {
   id: ProductId
   title: string
@@ -7,4 +12,8 @@ export interface Product {
   description: string
   category: string
   image: string
+}
+
+export interface ProductWithRating extends Product {
+  rating: ProductRating
 }

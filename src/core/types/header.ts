@@ -1,6 +1,7 @@
 export interface HeaderCategoryLink {
   label: string
   to: string
+  category?: string | null
 }
 
 export interface HeaderProps {
@@ -10,4 +11,6 @@ export interface HeaderProps {
   isAuthenticated?: boolean
   cartCount?: number
   wishlistCount?: number
+  isCartActive?: boolean
+  isWishlistActive?: boolean
 }

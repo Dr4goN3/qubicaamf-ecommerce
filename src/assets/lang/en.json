@@ -1,4 +1,35 @@
 {
+  "common": {
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "auth": {
+    "username": "Username",
+    "password": "Password",
+    "submit": "Login",
+    "logoutConfirmTitle": "Logout",
+    "logoutConfirmBody": "Are you sure you want to logout?"
+  },
+  "home": {
+    "catalog": {
+      "title": "Product catalog",
+      "subtitle": "In this section you can browse the product catalog. Click a product to open its details page."
+    },
+    "categories": {
+      "all": "All"
+    },
+    "products": {
+      "loading": "Loading products…",
+      "loadError": "Failed to load products.",
+      "columns": {
+        "product": "Product",
+        "price": "Price"
+      }
+    }
+  },
+  "table": {
+    "selectedRow": "Select row"
+  },
   "header": {
     "wishlist": "Wishlist",
     "cart": "Cart",
@@ -14,6 +45,62 @@
     "language": {
       "it": "Italian",
       "en": "English"
+    }
+  },
+  "product": {
+    "addToCart": "Add to cart",
+    "removeFromCart": "Remove from cart",
+    "priceLabel": "Price",
+    "descriptionLabel": "Description",
+    "ratingLabel": "Rating:",
+    "cart": {
+      "quantityLabel": "In cart: {count}"
+    },
+    "wishlist": {
+      "add": "Add to wishlist",
+      "saved": "Saved to wishlist",
+      "remove": "Remove from wishlist"
+    }
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty.",
+    "subtitle": "{count} items · Total {total}",
+    "subtitleDescription": "Here are the items currently in your cart.",
+    "removeConfirm": {
+      "title": "Remove item? | Remove items?",
+      "body": "Are you sure you want to remove \"{title}\" from the cart? This will remove {count} item. | Are you sure you want to remove \"{title}\" from the cart? This will remove {count} items."
+    },
+    "summary": {
+      "title": "Summary",
+      "items": "Items",
+      "total": "Total"
+    },
+    "item": {
+      "price": "Price",
+      "total": "Total",
+      "quantity": "Quantity",
+      "remove": "Remove",
+      "increase": "Increase quantity",
+      "decrease": "Decrease quantity"
+    }
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "subtitleDescription": "Here are the items saved to your wishlist.",
+    "empty": "You haven't added anything to your wishlist yet.",
+    "summary": {
+      "title": "Summary",
+      "items": "Items"
+    },
+    "removeConfirm": {
+      "title": "Remove from wishlist?",
+      "body": "Are you sure you want to remove \"{title}\" from your wishlist?"
+    },
+    "item": {
+      "price": "Price",
+      "remove": "Remove from wishlist",
+      "removeShort": "Remove"
     }
   }
 }

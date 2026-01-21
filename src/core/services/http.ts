@@ -16,6 +16,7 @@ http.interceptors.request.use((config) => {
     const token = userStore.token
 
     if (token) {
+      config.headers = config.headers ?? {}
       config.headers.Authorization = `Bearer ${token}`
     }
   } catch {

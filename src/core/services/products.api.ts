@@ -1,14 +1,14 @@
 import { API } from '@/core/services/constants/api.constants'
 import { http } from './http'
-import type { Product, ProductId } from '@/shared/types/product'
+import type { Product, ProductId, ProductWithRating } from '@/shared/types/product'
 
 export async function getProducts(): Promise<Product[]> {
   const { data } = await http.get<Product[]>(API.ENDPOINTS.PRODUCTS)
   return data
 }
 
-export async function getProductById(id: ProductId): Promise<Product> {
-  const { data } = await http.get<Product>(`${API.ENDPOINTS.PRODUCTS}/${id}`)
+export async function getProductById(id: ProductId): Promise<ProductWithRating> {
+  const { data } = await http.get<ProductWithRating>(`${API.ENDPOINTS.PRODUCTS}/${id}`)
   return data
 }
 

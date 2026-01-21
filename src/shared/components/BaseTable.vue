@@ -56,11 +56,13 @@ const emit = defineEmits<{
 
 function getRowKey(row: TableRow, index: number): string | number {
   if (typeof props.rowKey === 'function') {
-    return props.rowKey(row, index)
+    const key = props.rowKey(row, index)
+    return typeof key === 'string' || typeof key === 'number' ? key : index
   }
 
   if (typeof props.rowKey === 'string') {
-    return row[props.rowKey] as string | number
+    const key = row[props.rowKey]
+    return typeof key === 'string' || typeof key === 'number' ? key : index
   }
 
   return index
@@ -86,101 +88,112 @@ function handleRowClick(row: TableRow, index: number) {
 .base-table {
   width: 100%;
   overflow-x: auto;
-}
 
-.base-table__table {
-  width: 100%;
-  border-collapse: collapse;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-}
+  &__table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
 
-.base-table__header {
-  background: var(--surface-2);
-}
-
-.base-table__th {
-  padding: var(--space-3) var(--space-4);
-  text-align: left;
-  font-weight: var(--font-semibold);
-  font-size: var(--text-sm);
-  color: var(--text);
-  border-bottom: 1px solid var(--border);
-}
-
-.base-table__row {
-  transition: background var(--transition-fast);
-
-  &:hover {
+  &__header {
     background: var(--surface-2);
   }
 
-  &:not(:last-child) {
+  &__th {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    font-weight: var(--font-semibold);
+    font-size: var(--text-sm);
+    color: var(--text);
     border-bottom: 1px solid var(--border);
   }
 
-  &.is-clickable {
-    cursor: pointer;
-
-    &:focus-visible {
-      @include focus-ring;
-      outline-offset: -2px;
-    }
-
-    &:active {
-      transform: scale(0.99);
-    }
-  }
-}
-
-.base-table__td {
-  padding: var(--space-3) var(--space-4);
-  font-size: var(--text-base);
-  color: var(--text);
-}
-
-@media (max-width: $breakpoint-tablet) {
-  .base-table__table {
-    border: 0;
-  }
-
-  .base-table__header {
-    display: none;
-  }
-
-  .base-table__row {
-    display: block;
-    margin-bottom: var(--space-5);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: var(--space-4);
-    background: var(--surface);
-    box-shadow: var(--shadow-sm);
+  &__row {
+    transition: background var(--transition-fast), box-shadow var(--transition-fast),
+      transform var(--transition-fast);
 
     &:hover {
       background: var(--surface-2);
     }
 
-    &.is-clickable:hover {
-      box-shadow: var(--shadow-md);
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--border);
+    }
+
+    &.is-clickable {
+      cursor: pointer;
+
+      &:hover {
+        position: relative;
+        z-index: 1;
+        box-shadow: var(--shadow-sm);
+      }
+
+      &:focus-visible {
+        @include focus-ring;
+        outline-offset: -2px;
+      }
+
+      &:active {
+        transform: scale(0.99);
+      }
     }
   }
 
-  .base-table__td {
-    display: flex;
-    justify-content: space-between;
-    padding: var(--space-2) 0;
-    border-bottom: 1px solid var(--border);
+  &__td {
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-base);
+    color: var(--text);
+  }
+}
 
-    &:last-child {
-      border-bottom: 0;
+@media (max-width: $breakpoint-tablet) {
+  .base-table {
+    &__table {
+      border: 0;
     }
 
-    &::before {
-      content: attr(data-label);
-      font-weight: var(--font-semibold);
-      color: var(--text-muted);
-      margin-right: var(--space-3);
+    &__header {
+      display: none;
+    }
+
+    &__row {
+      display: block;
+      margin-bottom: var(--space-5);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-4);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+
+      &:hover {
+        background: var(--surface-2);
+      }
+
+      &.is-clickable:hover {
+        box-shadow: var(--shadow-md);
+      }
+    }
+
+    &__td {
+      display: flex;
+      justify-content: space-between;
+      padding: var(--space-2) 0;
+      border-bottom: 1px solid var(--border);
+
+      &:last-child {
+        border-bottom: 0;
+      }
+
+      &::before {
+        content: attr(data-label);
+        font-weight: var(--font-semibold);
+        color: var(--text-muted);
+        margin-right: var(--space-3);
+      }
     }
   }
 }

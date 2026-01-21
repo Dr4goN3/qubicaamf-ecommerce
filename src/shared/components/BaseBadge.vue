@@ -32,7 +32,7 @@ const props = withDefaults(defineProps<BaseBadgeProps>(), {
   font-weight: var(--font-bold);
   line-height: 1;
   color: var(--primary-contrast);
-  background-color: var(--danger, #e53935);
+  background-color: var(--danger);
   text-align: center;
   vertical-align: middle;
 }

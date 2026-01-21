@@ -1,4 +1,35 @@
 {
+  "common": {
+    "cancel": "Annulla",
+    "confirm": "Conferma"
+  },
+  "auth": {
+    "username": "Username",
+    "password": "Password",
+    "submit": "Accedi",
+    "logoutConfirmTitle": "Logout",
+    "logoutConfirmBody": "Sei sicuro di voler effettuare il logout?"
+  },
+  "home": {
+    "catalog": {
+      "title": "Catalogo prodotti",
+      "subtitle": "In questa sezione trovi il catalogo dei prodotti. Cliccando su un prodotto accederai alla sua scheda di dettaglio."
+    },
+    "categories": {
+      "all": "Tutte"
+    },
+    "products": {
+      "loading": "Caricamento prodotti…",
+      "loadError": "Impossibile caricare i prodotti.",
+      "columns": {
+        "product": "Prodotto",
+        "price": "Prezzo"
+      }
+    }
+  },
+  "table": {
+    "selectedRow": "Seleziona riga"
+  },
   "header": {
     "wishlist": "Preferiti",
     "cart": "Carrello",
@@ -14,6 +45,62 @@
     "language": {
       "it": "Italiano",
       "en": "Inglese"
+    }
+  },
+  "product": {
+    "addToCart": "Aggiungi al carrello",
+    "removeFromCart": "Rimuovi dal carrello",
+    "priceLabel": "Prezzo",
+    "descriptionLabel": "Descrizione",
+    "ratingLabel": "Punteggio:",
+    "cart": {
+      "quantityLabel": "Nel carrello: {count}"
+    },
+    "wishlist": {
+      "add": "Aggiungi ai preferiti",
+      "saved": "Salvato nei preferiti",
+      "remove": "Rimuovi dai preferiti"
+    }
+  },
+  "cart": {
+    "title": "Carrello",
+    "empty": "Il carrello è vuoto.",
+    "subtitle": "{count} articoli · Totale {total}",
+    "subtitleDescription": "In questa sezione trovi i prodotti aggiunti al carrello.",
+    "removeConfirm": {
+      "title": "Rimuovere articolo? | Rimuovere articoli?",
+      "body": "Sei sicuro di voler rimuovere \"{title}\" dal carrello? Verrà rimosso {count} articolo. | Sei sicuro di voler rimuovere \"{title}\" dal carrello? Verranno rimossi {count} articoli."
+    },
+    "summary": {
+      "title": "Riepilogo",
+      "items": "Articoli",
+      "total": "Totale"
+    },
+    "item": {
+      "price": "Prezzo",
+      "total": "Totale",
+      "quantity": "Quantità",
+      "remove": "Rimuovi",
+      "increase": "Aumenta quantità",
+      "decrease": "Diminuisci quantità"
+    }
+  },
+  "wishlist": {
+    "title": "Preferiti",
+    "subtitleDescription": "In questa sezione trovi i prodotti salvati nei preferiti.",
+    "empty": "Non hai ancora aggiunto articoli ai preferiti.",
+    "summary": {
+      "title": "Riepilogo degli articoli aggiunti ai preferiti",
+      "items": "Articoli"
+    },
+    "removeConfirm": {
+      "title": "Rimuovere dai preferiti?",
+      "body": "Sei sicuro di voler rimuovere \"{title}\" dai preferiti?"
+    },
+    "item": {
+      "price": "Prezzo",
+      "remove": "Rimuovi dai preferiti",
+      "removeShort": "Rimuovi"
     }
   }
 }
