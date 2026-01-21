@@ -16,7 +16,11 @@
         :wishlistCount="wishlistCount"
       />
 
-      <router-view />
+      <router-view v-slot="{ Component, route: viewRoute }">
+        <Transition name="view" mode="out-in">
+          <component :is="Component" :key="viewRoute.fullPath" />
+        </Transition>
+      </router-view>
     </div>
 
     <LoginDialog v-model="isLoginOpen" v-model:credentials="credentials" @submit="onLoginSubmit" />
@@ -155,5 +159,23 @@ watch(locale, () => {
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
+}
+
+.view-enter-active,
+.view-leave-active {
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.view-enter-from,
+.view-leave-to {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .view-enter-active,
+  .view-leave-active {
+    transition: none;
+  }
 }
 </style>
