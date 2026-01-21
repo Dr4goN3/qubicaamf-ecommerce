@@ -11,6 +11,10 @@
     "logoutConfirmBody": "Are you sure you want to logout?"
   },
   "home": {
+    "catalog": {
+      "title": "Product catalog",
+      "subtitle": "In this section you can browse the product catalog. Click a product to open its details page."
+    },
     "categories": {
       "all": "All"
     },
@@ -79,6 +83,24 @@
       "remove": "Remove",
       "increase": "Increase quantity",
       "decrease": "Decrease quantity"
+    }
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "subtitleDescription": "Here are the items saved to your wishlist.",
+    "empty": "You haven't added anything to your wishlist yet.",
+    "summary": {
+      "title": "Summary",
+      "items": "Items"
+    },
+    "removeConfirm": {
+      "title": "Remove from wishlist?",
+      "body": "Are you sure you want to remove \"{title}\" from your wishlist?"
+    },
+    "item": {
+      "price": "Price",
+      "remove": "Remove from wishlist",
+      "removeShort": "Remove"
     }
   }
 }
