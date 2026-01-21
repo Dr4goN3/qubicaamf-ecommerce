@@ -1,14 +1,14 @@
 import { http } from './http'
 import { API } from '@/core/services/constants/api.constants'
-import type { User } from '@/shared/types/user'
+import type { User, UserWithPassword } from '@/shared/types/user'
 
-export async function getUsers(): Promise<User[]> {
-  const { data } = await http.get<User[]>(API.ENDPOINTS.USERS)
+export async function getUsers(): Promise<UserWithPassword[]> {
+  const { data } = await http.get<UserWithPassword[]>(API.ENDPOINTS.USERS)
   return data
 }
 
-export async function getUserById(id: number): Promise<User> {
-  const { data } = await http.get<User>(`${API.ENDPOINTS.USERS}/${id}`)
+export async function getUserById(id: number): Promise<UserWithPassword> {
+  const { data } = await http.get<UserWithPassword>(`${API.ENDPOINTS.USERS}/${id}`)
   return data
 }
 
