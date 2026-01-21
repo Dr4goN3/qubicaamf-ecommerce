@@ -2,8 +2,7 @@
   <main class="home-view">
     <PageHeading :title="t('home.catalog.title')" :subtitle="subtitle" />
 
-    <p v-if="isProductsLoading" class="home-view__status">{{ t('home.products.loading') }}</p>
-    <p v-else-if="productsError" class="home-view__status">{{ productsError }}</p>
+    <p v-if="productsError" class="home-view__status">{{ productsError }}</p>
 
     <div v-else class="home-view__grid">
       <ProductCard
@@ -35,7 +34,6 @@ const router = useRouter()
 const { locale, t } = useI18n()
 
 const products = ref<Product[]>([])
-const isProductsLoading = ref(false)
 const productsError = ref<string | null>(null)
 
 const subtitle = computed(() => t('home.catalog.subtitle'))
@@ -50,7 +48,6 @@ const priceFormatter = computed(() => {
 })
 
 async function loadProducts(category: string | null) {
-  isProductsLoading.value = true
   productsError.value = null
 
   try {
@@ -58,8 +55,6 @@ async function loadProducts(category: string | null) {
   } catch {
     products.value = []
     productsError.value = t('home.products.loadError')
-  } finally {
-    isProductsLoading.value = false
   }
 }
 

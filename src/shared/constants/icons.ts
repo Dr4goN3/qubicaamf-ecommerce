@@ -5,9 +5,11 @@ import lightSvg from '@/assets/icons/light.svg?raw'
 import loginSvg from '@/assets/icons/login.svg?raw'
 import logoutSvg from '@/assets/icons/logout.svg?raw'
 import settingsSvg from '@/assets/icons/settings.svg?raw'
+import bowlingSvg from '@/assets/icons/bowling.svg?raw'
 import type { IconName } from '@/shared/types/ui-kit/icon'
 
 export const ICON_SVGS: Record<IconName, string> = {
+  bowling: bowlingSvg,
   cart: cartSvg,
   dark: darkSvg,
   fav: favSvg,

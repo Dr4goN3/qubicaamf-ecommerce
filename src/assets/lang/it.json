@@ -1,7 +1,8 @@
 {
   "common": {
     "cancel": "Annulla",
-    "confirm": "Conferma"
+    "confirm": "Conferma",
+    "loading": "Caricamento…"
   },
   "auth": {
     "username": "Username",

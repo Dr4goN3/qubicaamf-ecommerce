@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useUserStore } from '@/stores/user.store'
+import { useUiStore } from '@/stores/ui.store'
 import { API } from './constants/api.constants'
 
 export const http = axios.create({
@@ -12,6 +13,7 @@ export const http = axios.create({
 
 http.interceptors.request.use((config) => {
   try {
+    useUiStore().startLoading()
     const userStore = useUserStore()
     const token = userStore.token
 
@@ -25,3 +27,22 @@ http.interceptors.request.use((config) => {
 
   return config
 })
+
+http.interceptors.response.use(
+  (response) => {
+    stopUiLoadingSafely()
+    return response
+  },
+  (error) => {
+    stopUiLoadingSafely()
+    return Promise.reject(error)
+  }
+)
+
+function stopUiLoadingSafely() {
+  try {
+    useUiStore().stopLoading()
+  } catch {
+    //
+  }
+}

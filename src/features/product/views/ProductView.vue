@@ -1,7 +1,6 @@
 <template>
   <main class="product-view">
-    <p v-if="isLoading" class="product-view__status">Loading…</p>
-    <p v-else-if="error" class="product-view__status">{{ error }}</p>
+    <p v-if="error" class="product-view__status">{{ error }}</p>
 
     <ProductDetails
       v-else-if="product"
@@ -40,13 +39,11 @@ const props = defineProps<{
 }>()
 
 const product = ref<ProductWithRating | null>(null)
-const isLoading = ref(false)
 const error = ref<string | null>(null)
 
 async function load(id: string) {
   const numericId = Number(id)
 
-  isLoading.value = true
   error.value = null
 
   try {
@@ -54,8 +51,6 @@ async function load(id: string) {
   } catch {
     product.value = null
     error.value = 'Failed to load product.'
-  } finally {
-    isLoading.value = false
   }
 }
 
