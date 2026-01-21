@@ -21,9 +21,15 @@
 	    <div class="store-header__actions" aria-label="Azioni rapide">
 	      <slot name="actions">
           <!-- Wishlist  -->
-	        <BaseTooltip v-if="isAuthenticated" :text="t('header.wishlist')" position="bottom">
+	        <BaseTooltip
+            v-if="isAuthenticated"
+            :text="t('header.wishlist')"
+            position="bottom"
+            :disabled="!isCompactActions"
+          >
 	          <BaseButton variant="secondary" :aria-label="t('header.wishlist')">
 	            <BaseIcon name="fav" :size="18" class="store-header__icon" aria-hidden="true" />
+              <span class="store-header__action-text">{{ t('header.wishlist') }}</span>
 	            <BaseBadge
 	              v-if="wishlistCount"
 	              :count="wishlistCount"
@@ -34,9 +40,10 @@
 	        </BaseTooltip>
 
           <!-- Cart  -->
-	        <BaseTooltip v-if="isAuthenticated" :text="t('header.cart')" position="bottom">
+	        <BaseTooltip v-if="isAuthenticated" :text="t('header.cart')" position="bottom" :disabled="!isCompactActions">
 	          <BaseButton variant="secondary" :aria-label="t('header.cart')">
 	            <BaseIcon name="cart" :size="18" class="store-header__icon" aria-hidden="true" />
+              <span class="store-header__action-text">{{ t('header.cart') }}</span>
 	            <BaseBadge
 	              v-if="cartCount"
 	              :count="cartCount"
@@ -48,20 +55,28 @@
 
             <!-- Auth Controls: Login/Logout and Settings -->
            <div class="store-header__auth-controls">
-            <HeaderSettingsMenu v-model:language="language" v-model:theme="theme" />
-	          <BaseTooltip :text="isAuthenticated ? t('header.logout') : t('header.login')" position="bottom">
-	            <BaseButton
-	              :variant="isAuthenticated ? 'danger' : 'success'"
-	              :aria-label="isAuthenticated ? t('header.logout') : t('header.login')"
-	            >
-	              <BaseIcon
-	                :name="isAuthenticated ? 'logout' : 'login'"
-	                :size="18"
-	                class="store-header__icon"
-	                aria-hidden="true"
-	              />
-	            </BaseButton>
-	          </BaseTooltip>
+            <HeaderSettingsMenu v-model:language="language" :theme="theme" @themeChange="onThemeChange" />
+            <BaseTooltip
+              :text="isAuthenticated ? t('header.logout') : t('header.login')"
+              position="bottom"
+              :disabled="!isCompactActions"
+            >
+              <BaseButton
+                :variant="isAuthenticated ? 'danger' : 'success'"
+                :aria-label="isAuthenticated ? t('header.logout') : t('header.login')"
+                @click="emit('authClick')"
+              >
+                <BaseIcon
+                  :name="isAuthenticated ? 'logout' : 'login'"
+                  :size="18"
+                  class="store-header__icon"
+                  aria-hidden="true"
+                />
+                <span class="store-header__action-text">
+                  {{ isAuthenticated ? t('header.logout') : t('header.login') }}
+                </span>
+              </BaseButton>
+            </BaseTooltip>
 	        </div>
           
 	      </slot>
@@ -83,7 +98,12 @@
     <slot name="categories">
       <ul class="store-header__nav-list">
         <li v-for="category in categories" :key="category.to">
-          <RouterLink :to="category.to" class="store-header__nav-link">
+          <RouterLink
+            :to="category.to"
+            class="store-header__nav-link"
+            :class="{ 'is-active': isCategoryActive(category) }"
+            :aria-current="isCategoryActive(category) ? 'page' : undefined"
+          >
             {{ category.label }}
           </RouterLink>
         </li>
@@ -95,9 +115,10 @@
 
 <script setup lang="ts">
 import { toRefs } from 'vue'
-import { RouterLink } from 'vue-router'
+import { useMediaQuery } from '@vueuse/core'
+import { RouterLink, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import type { HeaderProps } from '@/core/types/header'
+import type { HeaderCategoryLink, HeaderProps } from '@/core/types/header'
 import { LANGUAGE, type Language } from '@/core/constants/language.constants'
 import { THEME, type Theme } from '@/core/constants/theme.constants'
 import HeaderSettingsMenu from '@/core/components/HeaderSettingsMenu.vue'
@@ -119,6 +140,31 @@ const { storeName, logoSrc, categories, isAuthenticated, cartCount, wishlistCoun
 
 const language = defineModel<Language>('language', { default: LANGUAGE.Italian })
 const theme = defineModel<Theme>('theme', { default: THEME.Light })
+
+const isCompactActions = useMediaQuery('(max-width: 768px)')
+
+const emit = defineEmits<{
+  authClick: []
+}>()
+
+function onThemeChange(nextTheme: Theme) {
+  theme.value = nextTheme
+}
+
+const route = useRoute()
+
+/**
+ * Highlight the active category link based on the current route
+ * @param categoryLink 
+ */
+function isCategoryActive(categoryLink: HeaderCategoryLink) {
+  if (route.path === '/' && categoryLink.category !== undefined) {
+    const currentCategory = typeof route.query.category === 'string' ? route.query.category : null
+    return (categoryLink.category ?? null) === currentCategory
+  }
+
+  return route.path === categoryLink.to
+}
 </script>
 
 <style scoped lang="scss">
@@ -136,141 +182,180 @@ const theme = defineModel<Theme>('theme', { default: THEME.Light })
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
-}
 
-.store-header__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-  flex-wrap: wrap;
-}
-
-.store-header__brand {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  min-width: 0;
-  flex: 1 1 auto;
-}
-
-.store-header__home {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-3);
-  color: inherit;
-  text-decoration: none;
-  font-weight: var(--font-semibold);
-}
-
-.store-header__logo {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  background: var(--surface-2);
-  display: grid;
-  place-items: center;
-  font-weight: var(--font-bold);
-  color: var(--primary);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
   }
 
-  &--placeholder {
-    letter-spacing: 1px;
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    min-width: 0;
+    flex: 1 1 auto;
   }
-}
 
-.store-header__name {
-  font-size: var(--text-lg);
-  white-space: nowrap;
-}
+  &__home {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: inherit;
+    text-decoration: none;
+    font-weight: var(--font-semibold);
+    min-width: 0;
+  }
 
-.store-header__nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.store-header__nav-list {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  flex-wrap: wrap;
-  justify-content: center;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.store-header__nav-link {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-weight: var(--font-medium);
-  padding: var(--space-1) var(--space-2);
-  border-radius: var(--radius-sm);
-  transition: background var(--transition-fast), color var(--transition-fast);
-
-  &:hover {
+  &__logo {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    flex: 0 0 40px;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
     background: var(--surface-2);
-    color: var(--text);
+    display: grid;
+    place-items: center;
+    font-weight: var(--font-bold);
+    color: var(--primary);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &--placeholder {
+      letter-spacing: 1px;
+    }
+  }
+
+  &__name {
+    font-size: var(--text-lg);
+    white-space: nowrap;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__nav-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__nav-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: var(--font-medium);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-fast), color var(--transition-fast);
+
+    &:hover {
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    &.is-active {
+      background: var(--surface-2);
+      color: var(--text);
+    }
+  }
+
+  &__actions {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    flex: 1 1 auto;
+  }
+
+  &__badge {
+    margin-left: var(--space-1);
+  }
+
+  &__icon {
+    margin-right: var(--space-2);
+  }
+
+  &__action-text {
+    font-weight: var(--font-semibold);
+    font-size: var(--text-sm);
+    line-height: 1;
+  }
+
+  &__auth-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  &__divider {
+    opacity: 0.9;
   }
 }
 
-.store-header__actions {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  flex: 1 1 auto;
-}
+@media (max-width: $breakpoint-tablet) {
+  .store-header {
+    &__action-text {
+      display: none;
+    }
 
-.store-header__badge {
-  margin-left: var(--space-1);
-}
-
-.store-header__icon {
-  margin-right: 0;
-}
-
-.store-header__auth-controls {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.store-header__divider {
-  opacity: 0.9;
+    &__icon {
+      margin-right: 0;
+    }
+  }
 }
 
 @media (max-width: $breakpoint-mobile) {
   .store-header {
+    position: relative;
     flex-direction: column;
     align-items: center;
-  }
 
-  .store-header__brand {
-    width: 100%;
-    justify-content: start;
-    gap: var(--space-3);
-  }
+    &__brand {
+      width: 100%;
+      justify-content: start;
+      gap: var(--space-3);
+    }
 
-  .store-header__nav {
-    width: 100%;
-  }
+    &__nav {
+      width: 100%;
+    }
 
-  .store-header__actions {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: var(--space-2);
+    &__actions {
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    &__name {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+      overflow-wrap: anywhere;
+    }
   }
 }
 </style>

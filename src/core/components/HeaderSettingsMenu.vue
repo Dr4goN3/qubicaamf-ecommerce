@@ -1,6 +1,6 @@
 <template>
   <div ref="rootRef" class="header-settings">
-    <BaseTooltip :text="t('header.settings')" position="bottom">
+    <BaseTooltip :text="t('header.settings')" position="bottom" :disabled="!isCompactActions">
       <BaseButton
         class="header-settings__trigger"
         variant="secondary"
@@ -10,6 +10,7 @@
         @click="toggle"
       >
         <BaseIcon name="settings" :size="18" aria-hidden="true" />
+        <span class="header-settings__trigger-text">{{ t('header.settings') }}</span>
       </BaseButton>
     </BaseTooltip>
 
@@ -84,8 +85,19 @@ import BaseTooltip from '@/shared/components/BaseTooltip.vue'
 const { t } = useI18n()
 
 const language = defineModel<Language>('language', { default: LANGUAGE.Italian })
-const theme = defineModel<Theme>('theme', { default: THEME.Light })
 
+const props = withDefaults(
+  defineProps<{
+    theme: Theme
+  }>(),
+  { theme: THEME.Light }
+)
+
+const emit = defineEmits<{
+  (e: 'themeChange', theme: Theme): void
+}>()
+
+const isCompactActions = useMediaQuery('(max-width: 768px)')
 const isMobile = useMediaQuery('(max-width: 640px)')
 
 const isOpen = ref(false)
@@ -97,7 +109,7 @@ const languageOptions = computed<{ label: string; value: Language }[]>(() => [
 ])
 
 const currentThemeLabel = computed(() =>
-  theme.value === THEME.Dark ? t('header.theme.dark') : t('header.theme.light')
+  props.theme === THEME.Dark ? t('header.theme.dark') : t('header.theme.light')
 )
 
 const themeTooltipText = computed(() => {
@@ -105,13 +117,13 @@ const themeTooltipText = computed(() => {
 })
 
 /**
- * Computed property to get/set whether the theme is dark, 
- * because BaseToggle works with boolean values
+ * Computed property to map Theme <-> boolean because BaseToggle works with boolean values.
+ * Emits theme changes to the parent so it can apply the global theme.
  */
 const isDark = computed({
-  get: () => theme.value === THEME.Dark,
+  get: () => props.theme === THEME.Dark,
   set: (value: boolean) => {
-    theme.value = value ? THEME.Dark : THEME.Light
+    emit('themeChange', value ? THEME.Dark : THEME.Light)
   },
 })
 
@@ -162,64 +174,74 @@ onBeforeUnmount(() => {
   position: relative;
   display: inline-flex;
   align-items: center;
-}
-
-.header-settings__backdrop {
-  display: none;
-}
-
-.header-settings__panel {
-  position: absolute;
-  top: calc(100% + var(--space-2));
-  right: 0;
-  min-width: 220px;
-  max-width: min(320px, calc(100vw - var(--space-6)));
-  padding: var(--space-3);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
-  z-index: 20;
-}
-
-.header-settings__row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-  min-width: 0;
-
-  & + & {
-    margin-top: var(--space-3);
+  
+  &__trigger {
+    gap: var(--space-2);
   }
-}
 
-.header-settings__label {
-  flex: 1 1 auto;
-  font-size: var(--text-sm);
-  color: var(--text-muted);
-  white-space: nowrap;
-}
+  &__trigger-text {
+    font-weight: var(--font-semibold);
+    font-size: var(--text-sm);
+    line-height: 1;
+  }
 
-.header-settings__control {
-  flex: 0 0 auto;
-}
-
-.header-settings__control.base-select {
-  width: auto;
-  max-width: 120px;
-}
-
-.header-settings__theme-control {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.header-settings__value {
-  font-size: var(--text-sm);
-  color: var(--text-muted);
-  white-space: nowrap;
+  &__backdrop {
+    display: none;
+  }
+  
+  &__panel {
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    right: 0;
+    min-width: 220px;
+    max-width: min(320px, calc(100vw - var(--space-6)));
+    padding: var(--space-3);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    z-index: 20;
+  }
+  
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    min-width: 0;
+  
+    & + & { // add top margin to all rows except the first
+      margin-top: var(--space-3);
+    }
+  }
+  
+  &__label {
+    flex: 1 1 auto;
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  
+  &__control {
+    flex: 0 0 auto;
+  
+    &.base-select {
+      width: auto;
+      max-width: 120px;
+    }
+  }
+  
+  &__theme-control {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  
+  &__value {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
 }
 
 .header-settings-fade-enter-active,
@@ -233,29 +255,39 @@ onBeforeUnmount(() => {
   transform: translateY(-4px);
 }
 
-@media (max-width: $breakpoint-mobile) {
-  .header-settings__backdrop {
-    display: block;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.35);
-    z-index: 19;
+@media (max-width: $breakpoint-tablet) {
+  .header-settings {
+    &__trigger-text {
+      display: none;
+    }
   }
+}
 
-  .header-settings__panel {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: auto;
-    min-width: 0;
-    max-width: none;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    padding-bottom: calc(var(--space-5) + env(safe-area-inset-bottom));
-    max-height: min(70vh, calc(100vh - 120px));
-    overflow: auto;
-    z-index: 20;
+@media (max-width: $breakpoint-mobile) {
+  .header-settings {
+    &__backdrop {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 19;
+    }
+  
+    &__panel {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: auto;
+      min-width: 0;
+      max-width: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      padding-bottom: calc(var(--space-5) + env(safe-area-inset-bottom));
+      max-height: min(70vh, calc(100vh - 120px));
+      overflow: auto;
+      z-index: 20;
+    }
   }
 }
 </style>
