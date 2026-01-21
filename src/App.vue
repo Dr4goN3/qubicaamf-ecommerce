@@ -1,6 +1,8 @@
 <template>
   <div class="app-container">
     <div class="app-container__inner content-wrapper">
+      <BaseLoader :model-value="uiStore.isLoading" :aria-label="t('common.loading')" />
+
       <StoreHeader
         v-model:language="language"
         v-model:theme="theme"
@@ -37,6 +39,7 @@ import { useRoute, useRouter } from 'vue-router'
 import StoreHeader from '@/core/components/StoreHeader.vue'
 import LoginDialog from '@/core/components/LoginDialog.vue'
 import LogoutDialog from '@/core/components/LogoutDialog.vue'
+import BaseLoader from '@/shared/components/BaseLoader.vue'
 
 import { getCategories } from '@/core/services/products.api'
 import { RouteName } from '@/core/router/route-names'
@@ -46,6 +49,7 @@ import { useUserStore } from '@/stores/user.store'
 import { useCartStore } from '@/stores/cart.store'
 import { useWishlistStore } from '@/stores/wishlist.store'
 import { useThemeStore } from '@/stores/theme.store'
+import { useUiStore } from '@/stores/ui.store'
 
 import type { HeaderCategoryLink } from '@/core/types/header'
 import type { UserCredentials } from '@/shared/types/auth'
@@ -54,6 +58,7 @@ const userStore = useUserStore()
 const cartStore = useCartStore()
 const wishlistStore = useWishlistStore()
 const themeStore = useThemeStore()
+const uiStore = useUiStore()
 const router = useRouter()
 const route = useRoute()
 

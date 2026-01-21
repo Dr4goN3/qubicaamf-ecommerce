@@ -12,7 +12,7 @@
           <img :src="logoSrc" :alt="`${storeName} logo`" />
         </div>
         <div v-else class="store-header__logo store-header__logo--placeholder">
-          QS
+          <BaseIcon name="bowling" :size="22" aria-hidden="true" />
         </div>
         <span class="store-header__name">{{ storeName }}</span>
       </RouterLink>
