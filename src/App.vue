@@ -7,7 +7,11 @@
         :storeName="'QubicaAMF Ecommerce'"
         :isAuthenticated="userStore.isAuthenticated"
         :categories="categories"
+        :isCartActive="isCartActive"
+        :isWishlistActive="isWishlistActive"
         @authClick="onAuthClick"
+        @cartClick="onCartClick"
+        @wishlistClick="onWishlistClick"
         :cartCount="cartCount"
         :wishlistCount="wishlistCount"
       />
@@ -24,7 +28,7 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import StoreHeader from '@/core/components/StoreHeader.vue'
 import LoginDialog from '@/core/components/LoginDialog.vue'
@@ -47,6 +51,7 @@ const cartStore = useCartStore()
 const wishlistStore = useWishlistStore()
 const themeStore = useThemeStore()
 const router = useRouter()
+const route = useRoute()
 
 const { theme } = storeToRefs(themeStore)
 const { count: cartCount } = storeToRefs(cartStore)
@@ -62,6 +67,9 @@ const language = computed<Language>({
 })
 
 const categories = ref<HeaderCategoryLink[]>([])
+
+const isCartActive = computed(() => route.name === RouteName.Cart)
+const isWishlistActive = computed(() => route.name === RouteName.Wishlist)
 
 const isLoginOpen = ref(false)
 const isLogoutOpen = ref(false)
@@ -89,6 +97,24 @@ function onAuthClick() {
     return
   }
   isLoginOpen.value = true
+}
+
+function onCartClick() {
+  if (!userStore.isAuthenticated) {
+    isLoginOpen.value = true
+    return
+  }
+
+  router.push({ name: RouteName.Cart })
+}
+
+function onWishlistClick() {
+  if (!userStore.isAuthenticated) {
+    isLoginOpen.value = true
+    return
+  }
+
+  router.push({ name: RouteName.Wishlist })
 }
 
 async function onLoginSubmit(value: UserCredentials) {
