@@ -24,12 +24,14 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 
 import StoreHeader from '@/core/components/StoreHeader.vue'
 import LoginDialog from '@/core/components/LoginDialog.vue'
 import LogoutDialog from '@/core/components/LogoutDialog.vue'
 
 import { getCategories } from '@/core/services/products.api'
+import { RouteName } from '@/core/router/route-names'
 import { LANGUAGE, type Language } from '@/core/constants/language.constants'
 
 import { useUserStore } from '@/stores/user.store'
@@ -44,6 +46,7 @@ const userStore = useUserStore()
 const cartStore = useCartStore()
 const wishlistStore = useWishlistStore()
 const themeStore = useThemeStore()
+const router = useRouter()
 
 const { theme } = storeToRefs(themeStore)
 const { count: cartCount } = storeToRefs(cartStore)
@@ -98,6 +101,7 @@ function onLogoutConfirm() {
   cartStore.clear()
   wishlistStore.clear()
   isLogoutOpen.value = false
+  router.push({ name: RouteName.Home })
 }
 
 onMounted(loadCategories)
