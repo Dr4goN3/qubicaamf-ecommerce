@@ -6,7 +6,7 @@ import BaseButton from '@/shared/components/BaseButton.vue'
 const meta = {
   title: 'Core/LogoutDialog',
   component: LogoutDialog,
-  tags: ['autodocs'],
+  tags: ['autodocs']
 } satisfies Meta<typeof LogoutDialog>
 
 export default meta
@@ -33,7 +33,6 @@ export const Interactive: Story = {
 
         <p v-if="confirmed" style="margin-top: 16px;">Confirmed!</p>
       </div>
-    `,
-  }),
+    `
+  })
 }
-

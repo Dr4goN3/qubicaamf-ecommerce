@@ -25,10 +25,7 @@ const props = withDefaults(defineProps<InputProps>(), {
 
 const model = defineModel<string>({ default: '' })
 
-const inputClasses = computed(() => [
-  'base-input',
-  `base-input--${props.size}`,
-])
+const inputClasses = computed(() => ['base-input', `base-input--${props.size}`])
 </script>
 
 <style scoped lang="scss">

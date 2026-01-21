@@ -20,4 +20,3 @@ export const useUiStore = defineStore('ui', () => {
 
   return { pendingRequests, isLoading, startLoading, stopLoading, resetLoading }
 })
-

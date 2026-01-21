@@ -12,13 +12,13 @@ const meta = {
     height: { control: 'text' },
     ariaLabel: { control: 'text' },
     closeOnBackdrop: { control: 'boolean' },
-    closeOnEsc: { control: 'boolean' },
+    closeOnEsc: { control: 'boolean' }
   },
   args: {
     ariaLabel: 'Dialog',
     closeOnBackdrop: true,
-    closeOnEsc: true,
-  },
+    closeOnEsc: true
+  }
 } satisfies Meta<typeof BaseDialog>
 
 export default meta
@@ -50,14 +50,14 @@ export const Interactive: Story = {
           </template>
         </BaseDialog>
       </div>
-    `,
-  }),
+    `
+  })
 }
 
 export const FixedSize: Story = {
   args: {
     width: 480,
-    height: 280,
+    height: 280
   },
   render: (args) => ({
     components: { BaseDialog, BaseButton },
@@ -81,6 +81,6 @@ export const FixedSize: Story = {
           </template>
         </BaseDialog>
       </div>
-    `,
-  }),
+    `
+  })
 }

@@ -43,7 +43,9 @@ defineEmits<{
   overflow: hidden;
   height: 100%;
   position: relative;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 
   &:hover {
     transform: scale(1.02);

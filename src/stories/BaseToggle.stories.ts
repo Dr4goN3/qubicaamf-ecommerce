@@ -10,14 +10,14 @@ const meta = {
     disabled: { control: 'boolean' },
     leftLabel: { control: 'text' },
     rightLabel: { control: 'text' },
-    ariaLabel: { control: 'text' },
+    ariaLabel: { control: 'text' }
   },
   args: {
     disabled: false,
     leftLabel: 'Off',
     rightLabel: 'On',
-    ariaLabel: 'Toggle',
-  },
+    ariaLabel: 'Toggle'
+  }
 } satisfies Meta<typeof BaseToggle>
 
 export default meta
@@ -37,6 +37,6 @@ export const Interactive: Story = {
           Value: {{ value }}
         </div>
       </div>
-    `,
-  }),
+    `
+  })
 }

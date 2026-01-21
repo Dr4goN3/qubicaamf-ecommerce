@@ -1,10 +1,6 @@
 <template>
   <Teleport to="body">
-    <div
-      v-if="isOpen"
-      class="base-dialog__backdrop"
-      @click="handleBackdropClick"
-    >
+    <div v-if="isOpen" class="base-dialog__backdrop" @click="handleBackdropClick">
       <div
         ref="dialogRef"
         class="base-dialog"
@@ -54,7 +50,7 @@ const isOpen = defineModel<boolean>({ default: false })
 const props = withDefaults(defineProps<DialogProps>(), {
   ariaLabel: 'Dialog',
   closeOnBackdrop: true,
-  closeOnEsc: true,
+  closeOnEsc: true
 })
 
 const dialogRef = ref<HTMLElement | null>(null)
@@ -65,7 +61,7 @@ const toCssSize = (value?: DialogSize) => (typeof value === 'number' ? `${value}
 
 const dialogStyle = computed(() => ({
   width: toCssSize(props.width),
-  height: toCssSize(props.height),
+  height: toCssSize(props.height)
 }))
 
 function closeDialog() {
@@ -94,7 +90,8 @@ watch(
       return
     }
 
-    if (previousBodyOverflow.value !== null) { // Restore previous overflow
+    if (previousBodyOverflow.value !== null) {
+      // Restore previous overflow
       document.body.style.overflow = previousBodyOverflow.value
       previousBodyOverflow.value = null
     }
@@ -200,5 +197,4 @@ onBeforeUnmount(() => {
     border-radius: 0;
   }
 }
-
 </style>

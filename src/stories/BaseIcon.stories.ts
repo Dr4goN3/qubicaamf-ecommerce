@@ -8,20 +8,20 @@ const meta = {
   argTypes: {
     name: {
       control: 'select',
-      options: ['bowling', 'cart', 'fav', 'login', 'logout'],
+      options: ['bowling', 'cart', 'fav', 'login', 'logout']
     },
     size: { control: 'number' },
     color: { control: 'color' },
     decorative: { control: 'boolean' },
-    ariaLabel: { control: 'text' },
+    ariaLabel: { control: 'text' }
   },
   args: {
     name: 'cart',
     size: 24,
     color: 'currentColor',
     decorative: true,
-    ariaLabel: '',
-  },
+    ariaLabel: ''
+  }
 } satisfies Meta<typeof BaseIcon>
 
 export default meta

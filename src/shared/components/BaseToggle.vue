@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<ToggleProps>(), {
   disabled: false,
   leftLabel: '',
   rightLabel: '',
-  ariaLabel: '',
+  ariaLabel: ''
 })
 
 const model = defineModel<boolean>({ default: false })

@@ -16,5 +16,5 @@ export const ICON_SVGS: Record<IconName, string> = {
   light: lightSvg,
   login: loginSvg,
   logout: logoutSvg,
-  settings: settingsSvg,
+  settings: settingsSvg
 }

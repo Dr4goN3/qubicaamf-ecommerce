@@ -1,40 +1,36 @@
 <template>
-<header
-  class="store-header"
-  role="banner"
->
-  <div class="store-header__top">
+  <header class="store-header" role="banner">
+    <div class="store-header__top">
+      <!-- Brand Logo and Name -->
+      <div class="store-header__brand">
+        <RouterLink to="/" class="store-header__home">
+          <div v-if="logoSrc" class="store-header__logo">
+            <img :src="logoSrc" :alt="`${storeName} logo`" />
+          </div>
+          <div v-else class="store-header__logo store-header__logo--placeholder">
+            <BaseIcon name="bowling" :size="22" aria-hidden="true" />
+          </div>
+          <span class="store-header__name">{{ storeName }}</span>
+        </RouterLink>
+      </div>
 
-    <!-- Brand Logo and Name -->
-    <div class="store-header__brand">
-      <RouterLink to="/" class="store-header__home">
-        <div v-if="logoSrc" class="store-header__logo">
-          <img :src="logoSrc" :alt="`${storeName} logo`" />
-        </div>
-        <div v-else class="store-header__logo store-header__logo--placeholder">
-          <BaseIcon name="bowling" :size="22" aria-hidden="true" />
-        </div>
-        <span class="store-header__name">{{ storeName }}</span>
-      </RouterLink>
-    </div>
-
-	    <div class="store-header__actions" aria-label="Azioni rapide">
-	      <slot name="actions">
+      <div class="store-header__actions" aria-label="Azioni rapide">
+        <slot name="actions">
           <!-- Wishlist  -->
-	        <BaseTooltip
+          <BaseTooltip
             v-if="isAuthenticated"
             :text="t('header.wishlist')"
             position="bottom"
             :disabled="!isCompactActions"
           >
-	          <BaseButton
+            <BaseButton
               variant="secondary"
               :aria-label="t('header.wishlist')"
               @click="emit('wishlistClick')"
               class="store-header__action-button"
               :class="{ 'is-active': isWishlistActive }"
             >
-	            <BaseIcon
+              <BaseIcon
                 name="fav"
                 :size="18"
                 :key="wishlistAnimationKey"
@@ -42,26 +38,31 @@
                 aria-hidden="true"
               />
               <span class="store-header__action-text">{{ t('header.wishlist') }}</span>
-	            <BaseBadge
-	              v-if="wishlistCount"
-	              :count="wishlistCount"
-	              :key="wishlistAnimationKey"
-	              class="store-header__badge is-pulse"
-	              aria-hidden="true"
-	            />
-	          </BaseButton>
-	        </BaseTooltip>
+              <BaseBadge
+                v-if="wishlistCount"
+                :count="wishlistCount"
+                :key="wishlistAnimationKey"
+                class="store-header__badge is-pulse"
+                aria-hidden="true"
+              />
+            </BaseButton>
+          </BaseTooltip>
 
           <!-- Cart  -->
-	        <BaseTooltip v-if="isAuthenticated" :text="t('header.cart')" position="bottom" :disabled="!isCompactActions">
-	          <BaseButton
+          <BaseTooltip
+            v-if="isAuthenticated"
+            :text="t('header.cart')"
+            position="bottom"
+            :disabled="!isCompactActions"
+          >
+            <BaseButton
               variant="secondary"
               :aria-label="t('header.cart')"
               @click="emit('cartClick')"
               class="store-header__action-button"
               :class="{ 'is-active': isCartActive }"
             >
-	            <BaseIcon
+              <BaseIcon
                 name="cart"
                 :size="18"
                 :key="cartAnimationKey"
@@ -69,19 +70,23 @@
                 aria-hidden="true"
               />
               <span class="store-header__action-text">{{ t('header.cart') }}</span>
-	            <BaseBadge
-	              v-if="cartCount"
-	              :count="cartCount"
-	              :key="cartAnimationKey"
-	              class="store-header__badge is-pulse"
-	              aria-hidden="true"
-	            />
-	          </BaseButton>
-	        </BaseTooltip>
+              <BaseBadge
+                v-if="cartCount"
+                :count="cartCount"
+                :key="cartAnimationKey"
+                class="store-header__badge is-pulse"
+                aria-hidden="true"
+              />
+            </BaseButton>
+          </BaseTooltip>
 
-            <!-- Auth Controls: Login/Logout and Settings -->
-           <div class="store-header__auth-controls">
-            <HeaderSettingsMenu v-model:language="language" :theme="theme" @themeChange="onThemeChange" />
+          <!-- Auth Controls: Login/Logout and Settings -->
+          <div class="store-header__auth-controls">
+            <HeaderSettingsMenu
+              v-model:language="language"
+              :theme="theme"
+              @themeChange="onThemeChange"
+            />
             <BaseTooltip
               :text="isAuthenticated ? t('header.logout') : t('header.login')"
               position="bottom"
@@ -103,40 +108,39 @@
                 </span>
               </BaseButton>
             </BaseTooltip>
-	        </div>
-          
-	      </slot>
-	    </div>
-	  </div>
+          </div>
+        </slot>
+      </div>
+    </div>
 
-  <div
-    v-if="$slots.categories || categories.length"
-    class="divider store-header__divider"
-    aria-hidden="true"
-  />
+    <div
+      v-if="$slots.categories || categories.length"
+      class="divider store-header__divider"
+      aria-hidden="true"
+    />
 
-  <!--Categories Navigation-->
-  <nav
-    v-if="$slots.categories || categories.length"
-    class="store-header__nav"
-    aria-label="Categorie principali"
-  >
-    <slot name="categories">
-      <ul class="store-header__nav-list">
-        <li v-for="category in categories" :key="category.to">
-          <RouterLink
-            :to="category.to"
-            class="store-header__nav-link"
-            :class="{ 'is-active': isCategoryActive(category) }"
-            :aria-current="isCategoryActive(category) ? 'page' : undefined"
-          >
-            {{ category.label }}
-          </RouterLink>
-        </li>
-      </ul>
-    </slot>
-  </nav>
-</header>
+    <!--Categories Navigation-->
+    <nav
+      v-if="$slots.categories || categories.length"
+      class="store-header__nav"
+      aria-label="Categorie principali"
+    >
+      <slot name="categories">
+        <ul class="store-header__nav-list">
+          <li v-for="category in categories" :key="category.to">
+            <RouterLink
+              :to="category.to"
+              class="store-header__nav-link"
+              :class="{ 'is-active': isCategoryActive(category) }"
+              :aria-current="isCategoryActive(category) ? 'page' : undefined"
+            >
+              {{ category.label }}
+            </RouterLink>
+          </li>
+        </ul>
+      </slot>
+    </nav>
+  </header>
 </template>
 
 <script setup lang="ts">
@@ -161,10 +165,19 @@ const props = withDefaults(defineProps<HeaderProps>(), {
   cartCount: 0,
   wishlistCount: 0,
   isCartActive: false,
-  isWishlistActive: false,
+  isWishlistActive: false
 })
 
-const { storeName, logoSrc, categories, isAuthenticated, cartCount, wishlistCount, isCartActive, isWishlistActive } = toRefs(props)
+const {
+  storeName,
+  logoSrc,
+  categories,
+  isAuthenticated,
+  cartCount,
+  wishlistCount,
+  isCartActive,
+  isWishlistActive
+} = toRefs(props)
 
 const language = defineModel<Language>('language', { default: LANGUAGE.Italian })
 const theme = defineModel<Theme>('theme', { default: THEME.Light })
@@ -188,7 +201,7 @@ const route = useRoute()
 
 /**
  * Highlight the active category link based on the current route
- * @param categoryLink 
+ * @param categoryLink
  */
 function isCategoryActive(categoryLink: HeaderCategoryLink) {
   if (route.path === '/' && categoryLink.category !== undefined) {
@@ -322,7 +335,9 @@ watch(wishlistCount, (next, prev) => {
     font-weight: var(--font-medium);
     padding: var(--space-1) var(--space-2);
     border-radius: var(--radius-sm);
-    transition: background var(--transition-fast), color var(--transition-fast);
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast);
 
     &:hover {
       background: var(--surface-2);

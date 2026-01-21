@@ -34,14 +34,19 @@
               :quantity="item.quantity"
               @increase="cartStore.addOneItem(item.product)"
               @decrease="cartStore.removeOneItem(item.product.id)"
-              @remove="openConfirmRemoveItemsDialog(item.product.id, item.product.title, item.quantity)"
+              @remove="
+                openConfirmRemoveItemsDialog(item.product.id, item.product.title, item.quantity)
+              "
             />
           </li>
         </ul>
       </section>
     </div>
 
-    <BaseDialog v-model="isConfirmRemoveItemsDialogOpen" :aria-label="confirmRemoveItemsDialogTitle">
+    <BaseDialog
+      v-model="isConfirmRemoveItemsDialogOpen"
+      :aria-label="confirmRemoveItemsDialogTitle"
+    >
       <template #title>{{ confirmRemoveItemsDialogTitle }}</template>
 
       <p class="cart-view__confirm-text">
@@ -92,7 +97,7 @@ const cards = computed(() =>
     product: item.product,
     quantity: item.quantity,
     unitPriceLabel: formatter.value.format(item.product.price),
-    lineTotalLabel: formatter.value.format(item.product.price * item.quantity),
+    lineTotalLabel: formatter.value.format(item.product.price * item.quantity)
   }))
 )
 
@@ -220,6 +225,5 @@ function confirmRemoveItems() {
       margin-left: 0;
     }
   }
-
 }
 </style>

@@ -72,7 +72,7 @@ const language = computed<Language>({
   get: () => (locale.value as Language) ?? LANGUAGE.Italian,
   set: (value) => {
     locale.value = value
-  },
+  }
 })
 
 const categories = ref<HeaderCategoryLink[]>([])
@@ -92,8 +92,8 @@ async function loadCategories() {
       ...list.map((category) => ({
         label: category,
         to: `/?category=${encodeURIComponent(category)}`,
-        category,
-      })),
+        category
+      }))
     ]
   } catch {
     categories.value = []
@@ -168,7 +168,9 @@ watch(locale, () => {
 
 .view-enter-active,
 .view-leave-active {
-  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .view-enter-from,

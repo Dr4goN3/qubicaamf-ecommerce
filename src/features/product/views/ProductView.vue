@@ -81,10 +81,9 @@ watch(
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  
+
   &__status {
     color: var(--text-muted);
   }
 }
-
 </style>

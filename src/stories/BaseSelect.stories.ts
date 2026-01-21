@@ -9,21 +9,21 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'line'],
+      options: ['default', 'line']
     },
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg'],
+      options: ['sm', 'md', 'lg']
     },
     disabled: {
-      control: 'boolean',
+      control: 'boolean'
     },
     required: {
-      control: 'boolean',
+      control: 'boolean'
     },
     placeholder: {
-      control: 'text',
-    },
+      control: 'text'
+    }
   },
   args: {
     variant: 'default',
@@ -34,9 +34,9 @@ const meta = {
     options: [
       { label: 'test 1', value: 'value test 1' },
       { label: 'test 2', value: 'value test 2' },
-      { label: "test 3", value: "value test 3" },
-    ],
-  },
+      { label: 'test 3', value: 'value test 3' }
+    ]
+  }
 } satisfies Meta<typeof BaseSelect>
 
 export default meta
@@ -53,6 +53,6 @@ export const Interactive: Story = {
       <div style="max-width: 400px;">
         <BaseSelect v-bind="args" v-model="value" />
       </div>
-    `,
-  }),
+    `
+  })
 }

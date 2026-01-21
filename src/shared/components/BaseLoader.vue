@@ -17,7 +17,7 @@ const props = withDefaults(
     ariaLabel?: string
   }>(),
   {
-    ariaLabel: 'Loading',
+    ariaLabel: 'Loading'
   }
 )
 </script>

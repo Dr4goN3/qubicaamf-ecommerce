@@ -10,7 +10,7 @@ export function registerAuthGuard(router: Router) {
     if (requiresAuth && !userStore.isAuthenticated) {
       return {
         name: RouteName.Home,
-        query: { redirectTo: to.fullPath },
+        query: { redirectTo: to.fullPath }
       }
     }
 

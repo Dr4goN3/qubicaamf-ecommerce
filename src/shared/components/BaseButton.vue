@@ -1,9 +1,5 @@
 <template>
-  <button
-    :type="props.type"
-    :disabled="props.disabled"
-    :class="buttonClasses"
-  >
+  <button :type="props.type" :disabled="props.disabled" :class="buttonClasses">
     <slot />
   </button>
 </template>
@@ -60,7 +56,6 @@ const buttonClasses = computed(() => [
   &:hover:not(:disabled) {
     background: var(--surface-2);
   }
-  
 }
 
 .base-button--danger {

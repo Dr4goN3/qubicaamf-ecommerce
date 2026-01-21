@@ -26,11 +26,7 @@
             :data-label="column.label"
             class="base-table__td"
           >
-            <slot
-              :name="`cell-${column.key}`"
-              :row="row"
-              :value="getCellValue(row, column)"
-            >
+            <slot :name="`cell-${column.key}`" :row="row" :value="getCellValue(row, column)">
               {{ getCellValue(row, column) }}
             </slot>
           </td>
@@ -47,7 +43,7 @@ import type { TableColumn, TableProps, TableRow } from '@/shared/types/ui-kit/ta
 const { t } = useI18n()
 
 const props = withDefaults(defineProps<TableProps>(), {
-  clickable: false,
+  clickable: false
 })
 
 const emit = defineEmits<{
@@ -112,7 +108,9 @@ function handleRowClick(row: TableRow, index: number) {
   }
 
   &__row {
-    transition: background var(--transition-fast), box-shadow var(--transition-fast),
+    transition:
+      background var(--transition-fast),
+      box-shadow var(--transition-fast),
       transform var(--transition-fast);
 
     &:hover {

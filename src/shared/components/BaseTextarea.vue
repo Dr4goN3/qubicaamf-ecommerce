@@ -25,10 +25,7 @@ const props = withDefaults(defineProps<TextareaProps>(), {
 
 const model = defineModel<string>({ default: '' })
 
-const textareaClasses = computed(() => [
-  'base-textarea',
-  `base-textarea--${props.size}`,
-])
+const textareaClasses = computed(() => ['base-textarea', `base-textarea--${props.size}`])
 </script>
 
 <style scoped lang="scss">

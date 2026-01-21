@@ -31,7 +31,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   size: 'md',
   disabled: false,
   required: false,
-  placeholder: '',
+  placeholder: ''
 })
 
 const model = defineModel<SelectValue | ''>({ default: '' })
@@ -39,7 +39,7 @@ const model = defineModel<SelectValue | ''>({ default: '' })
 const selectClasses = computed(() => [
   'base-select',
   `base-select--${props.size}`,
-  `base-select--${props.variant}`,
+  `base-select--${props.variant}`
 ])
 </script>
 
@@ -80,7 +80,9 @@ const selectClasses = computed(() => [
   background-repeat: no-repeat;
   background-position: 0 100%;
   background-size: 0 1px;
-  transition: background-size var(--transition-fast), border-color var(--transition-fast),
+  transition:
+    background-size var(--transition-fast),
+    border-color var(--transition-fast),
     color var(--transition-fast);
 
   &:hover:not(:disabled) {

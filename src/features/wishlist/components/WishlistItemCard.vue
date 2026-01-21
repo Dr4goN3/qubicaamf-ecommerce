@@ -16,7 +16,9 @@
             @click="$emit('remove')"
           >
             <BaseIcon name="fav" :size="18" color="var(--warning)" aria-hidden="true" />
-            <span class="wishlist-item-card__remove-text">{{ t('wishlist.item.removeShort') }}</span>
+            <span class="wishlist-item-card__remove-text">{{
+              t('wishlist.item.removeShort')
+            }}</span>
           </BaseButton>
         </BaseTooltip>
       </div>

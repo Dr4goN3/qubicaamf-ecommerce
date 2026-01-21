@@ -14,7 +14,7 @@ import { BadgeColors, type BaseBadgeProps } from '@/shared/types/ui-kit/badge'
 
 const props = withDefaults(defineProps<BaseBadgeProps>(), {
   count: 0,
-  color: BadgeColors.RED,
+  color: BadgeColors.RED
 })
 </script>
 

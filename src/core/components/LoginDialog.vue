@@ -21,7 +21,9 @@
 
     <form id="login-dialog-form" class="login-dialog__form" @submit.prevent="onSubmit">
       <div class="login-dialog__field">
-        <label class="login-dialog__label" for="login-dialog-username">{{ t('auth.username') }}</label>
+        <label class="login-dialog__label" for="login-dialog-username">{{
+          t('auth.username')
+        }}</label>
         <BaseInput
           id="login-dialog-username"
           v-model="credentials.username"
@@ -31,7 +33,9 @@
       </div>
 
       <div class="login-dialog__field">
-        <label class="login-dialog__label" for="login-dialog-password">{{ t('auth.password') }}</label>
+        <label class="login-dialog__label" for="login-dialog-password">{{
+          t('auth.password')
+        }}</label>
         <BaseInput
           id="login-dialog-password"
           v-model="credentials.password"
@@ -70,7 +74,7 @@ const emit = defineEmits<{
 
 const isOpen = defineModel<boolean>({ default: false })
 const credentials = defineModel<UserCredentials>('credentials', {
-  default: () => ({ username: '', password: '' }),
+  default: () => ({ username: '', password: '' })
 })
 
 const { t } = useI18n()
@@ -83,7 +87,7 @@ const selectedUsername = ref<string>('')
 const userOptions = computed(() =>
   users.value.map((user) => ({
     label: user.username,
-    value: user.username,
+    value: user.username
   }))
 )
 

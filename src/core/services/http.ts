@@ -7,8 +7,8 @@ export const http = axios.create({
   baseURL: API.BASE_URL,
   timeout: 15000,
   headers: {
-    'Content-Type': 'application/json',
-  },
+    'Content-Type': 'application/json'
+  }
 })
 
 http.interceptors.request.use((config) => {
@@ -22,7 +22,7 @@ http.interceptors.request.use((config) => {
       config.headers.Authorization = `Bearer ${token}`
     }
   } catch {
-    // 
+    //
   }
 
   return config

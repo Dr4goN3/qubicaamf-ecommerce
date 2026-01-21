@@ -4,4 +4,3 @@ export interface ToggleProps {
   rightLabel?: string
   ariaLabel?: string
 }
-

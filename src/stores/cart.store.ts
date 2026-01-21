@@ -62,5 +62,16 @@ export const useCartStore = defineStore('cart', () => {
     items.value = {} as CartMap
   }
 
-  return { items, list, count, totalPrice, getQuantity, addOneItem, removeOneItem, removeAllItems, updateQuantity, clear }
+  return {
+    items,
+    list,
+    count,
+    totalPrice,
+    getQuantity,
+    addOneItem,
+    removeOneItem,
+    removeAllItems,
+    updateQuantity,
+    clear
+  }
 })

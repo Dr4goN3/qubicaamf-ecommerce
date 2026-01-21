@@ -14,15 +14,15 @@
 @mixin interactive {
   transition: all var(--transition-fast);
   cursor: pointer;
-  
+
   &:hover:not(:disabled) {
     opacity: 0.9;
   }
-  
+
   &:focus-visible {
     @include focus-ring;
   }
-  
+
   &:active:not(:disabled) {
     transform: scale(0.98);
   }

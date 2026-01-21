@@ -7,7 +7,7 @@ import type { UserCredentials } from '@/shared/types/auth'
 const meta = {
   title: 'Core/LoginDialog',
   component: LoginDialog,
-  tags: ['autodocs'],
+  tags: ['autodocs']
 } satisfies Meta<typeof LoginDialog>
 
 export default meta
@@ -37,7 +37,6 @@ export const Interactive: Story = {
 {{ lastSubmit }}
         </pre>
       </div>
-    `,
-  }),
+    `
+  })
 }
-

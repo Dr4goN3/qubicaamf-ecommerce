@@ -5,6 +5,6 @@ export const API = {
     CATEGORIES: '/products/categories',
     USERS: '/users',
     AUTH_LOGIN: '/auth/login',
-    CARTS: '/carts',
-  },
+    CARTS: '/carts'
+  }
 } as const

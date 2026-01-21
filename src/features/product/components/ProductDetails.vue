@@ -43,7 +43,9 @@
           </div>
 
           <div class="product-details__description">
-            <span class="product-details__description-label">{{ t('product.descriptionLabel') }}</span>
+            <span class="product-details__description-label">{{
+              t('product.descriptionLabel')
+            }}</span>
             <p class="product-details__description-text">{{ props.product.description }}</p>
           </div>
           <p class="product-details__rating">
@@ -51,7 +53,7 @@
             {{ ratingLabel }}
           </p>
         </div>
-  
+
         <div v-if="props.isAuthenticated" class="product-details__actions">
           <BaseButton
             v-if="props.cartQuantity > 0"
@@ -65,7 +67,6 @@
           </BaseButton>
         </div>
       </div>
-      
     </div>
   </section>
 </template>
@@ -89,7 +90,7 @@ const props = withDefaults(
   {
     isAuthenticated: false,
     cartQuantity: 0,
-    isInWishlist: false,
+    isInWishlist: false
   }
 )
 
@@ -106,14 +107,15 @@ const wishlistLabel = computed(() =>
   props.isInWishlist ? t('product.wishlist.saved') : t('product.wishlist.add')
 )
 
-const cartQuantityLabel = computed(() => t('product.cart.quantityLabel', { count: props.cartQuantity }))
+const cartQuantityLabel = computed(() =>
+  t('product.cart.quantityLabel', { count: props.cartQuantity })
+)
 
 defineEmits<{
   (e: 'add-to-cart'): void
   (e: 'remove-from-cart'): void
   (e: 'toggle-wishlist'): void
 }>()
-
 </script>
 <style scoped lang="scss">
 .product-details {

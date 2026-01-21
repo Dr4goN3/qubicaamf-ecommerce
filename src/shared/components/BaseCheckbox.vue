@@ -69,7 +69,9 @@ const model = defineModel<boolean>({ default: false })
   border: 2px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--surface);
-  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
   flex-shrink: 0;
 
   &::after {
@@ -80,7 +82,9 @@ const model = defineModel<boolean>({ default: false })
     border-radius: 2px;
     transform: scale(0);
     opacity: 0;
-    transition: transform var(--transition-fast), opacity var(--transition-fast);
+    transition:
+      transform var(--transition-fast),
+      opacity var(--transition-fast);
   }
 }
 

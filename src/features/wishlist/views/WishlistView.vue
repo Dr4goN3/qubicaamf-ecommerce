@@ -34,7 +34,10 @@
       </section>
     </div>
 
-    <BaseDialog v-model="isConfirmRemoveItemsDialogOpen" :aria-label="t('wishlist.removeConfirm.title')">
+    <BaseDialog
+      v-model="isConfirmRemoveItemsDialogOpen"
+      :aria-label="t('wishlist.removeConfirm.title')"
+    >
       <template #title>{{ t('wishlist.removeConfirm.title') }}</template>
 
       <p class="wishlist-view__confirm-text">
@@ -81,7 +84,7 @@ const subtitle = computed(() => t('wishlist.subtitleDescription'))
 const cards = computed(() =>
   list.value.map((product) => ({
     product,
-    priceLabel: formatter.value.format(product.price),
+    priceLabel: formatter.value.format(product.price)
   }))
 )
 

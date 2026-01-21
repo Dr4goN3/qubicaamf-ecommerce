@@ -45,13 +45,13 @@
           <span class="header-settings__label">
             {{ t('header.themeLabel') }}
           </span>
-          <BaseTooltip
-            :text="themeTooltipText"
-            position="left"
-            :disabled="isMobile"
-          >
+          <BaseTooltip :text="themeTooltipText" position="left" :disabled="isMobile">
             <div class="header-settings__theme-control">
-              <BaseToggle class="header-settings__control" v-model="isDark" :aria-label="themeTooltipText">
+              <BaseToggle
+                class="header-settings__control"
+                v-model="isDark"
+                :aria-label="themeTooltipText"
+              >
                 <template #left>
                   <BaseIcon name="light" :size="16" color="#d97706" />
                 </template>
@@ -105,7 +105,7 @@ const rootRef = ref<HTMLElement | null>(null)
 
 const languageOptions = computed<{ label: string; value: Language }[]>(() => [
   { label: t('header.language.it'), value: LANGUAGE.Italian },
-  { label: t('header.language.en'), value: LANGUAGE.English },
+  { label: t('header.language.en'), value: LANGUAGE.English }
 ])
 
 const currentThemeLabel = computed(() =>
@@ -124,7 +124,7 @@ const isDark = computed({
   get: () => props.theme === THEME.Dark,
   set: (value: boolean) => {
     emit('themeChange', value ? THEME.Dark : THEME.Light)
-  },
+  }
 })
 
 function close() {
@@ -174,7 +174,7 @@ onBeforeUnmount(() => {
   position: relative;
   display: inline-flex;
   align-items: center;
-  
+
   &__trigger {
     gap: var(--space-2);
   }
@@ -188,7 +188,7 @@ onBeforeUnmount(() => {
   &__backdrop {
     display: none;
   }
-  
+
   &__panel {
     position: absolute;
     top: calc(100% + var(--space-2));
@@ -202,41 +202,42 @@ onBeforeUnmount(() => {
     box-shadow: var(--shadow-md);
     z-index: 20;
   }
-  
+
   &__row {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-3);
     min-width: 0;
-  
-    & + & { // add top margin to all rows except the first
+
+    & + & {
+      // add top margin to all rows except the first
       margin-top: var(--space-3);
     }
   }
-  
+
   &__label {
     flex: 1 1 auto;
     font-size: var(--text-sm);
     color: var(--text-muted);
     white-space: nowrap;
   }
-  
+
   &__control {
     flex: 0 0 auto;
-  
+
     &.base-select {
       width: auto;
       max-width: 120px;
     }
   }
-  
+
   &__theme-control {
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
   }
-  
+
   &__value {
     font-size: var(--text-sm);
     color: var(--text-muted);
@@ -246,7 +247,9 @@ onBeforeUnmount(() => {
 
 .header-settings-fade-enter-active,
 .header-settings-fade-leave-active {
-  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .header-settings-fade-enter-from,
@@ -272,7 +275,7 @@ onBeforeUnmount(() => {
       background: rgba(0, 0, 0, 0.35);
       z-index: 19;
     }
-  
+
     &__panel {
       position: fixed;
       left: 0;

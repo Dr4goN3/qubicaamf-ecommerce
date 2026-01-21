@@ -5,4 +5,3 @@ export interface TooltipProps {
   position?: TooltipPosition
   disabled?: boolean
 }
-

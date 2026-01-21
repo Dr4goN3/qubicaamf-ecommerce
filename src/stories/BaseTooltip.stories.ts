@@ -10,15 +10,15 @@ const meta = {
     text: { control: 'text' },
     position: {
       control: 'select',
-      options: ['top', 'right', 'bottom', 'left'],
+      options: ['top', 'right', 'bottom', 'left']
     },
-    disabled: { control: 'boolean' },
+    disabled: { control: 'boolean' }
   },
   args: {
     text: 'Tooltip text',
     position: 'top',
-    disabled: false,
-  },
+    disabled: false
+  }
 } satisfies Meta<typeof BaseTooltip>
 
 export default meta
@@ -36,7 +36,6 @@ export const Interactive: Story = {
           <BaseButton variant="secondary">Hover me</BaseButton>
         </BaseTooltip>
       </div>
-    `,
-  }),
+    `
+  })
 }
-

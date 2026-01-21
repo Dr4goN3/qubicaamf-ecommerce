@@ -11,7 +11,6 @@ function toCurrency(language: Language): string {
 export function createPriceFormatter(language: Language): Intl.NumberFormat {
   return new Intl.NumberFormat(toIntlLocale(language), {
     style: 'currency',
-    currency: toCurrency(language),
+    currency: toCurrency(language)
   })
 }
-

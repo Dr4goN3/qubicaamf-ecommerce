@@ -23,7 +23,7 @@ import type { TooltipProps } from '@/shared/types/ui-kit/tooltip'
 
 const props = withDefaults(defineProps<TooltipProps>(), {
   position: 'top',
-  disabled: false,
+  disabled: false
 })
 
 const show = ref(false)
@@ -76,7 +76,9 @@ const show = ref(false)
 
 .base-tooltip-fade-enter-active,
 .base-tooltip-fade-leave-active {
-  transition: opacity 140ms ease, transform 140ms ease;
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
 }
 
 .base-tooltip-fade-enter-from,
@@ -89,4 +91,3 @@ const show = ref(false)
   opacity: 1;
 }
 </style>
-

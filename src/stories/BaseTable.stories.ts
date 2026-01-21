@@ -8,7 +8,7 @@ const meta = {
   argTypes: {
     clickable: {
       control: 'boolean'
-    },
+    }
   },
   args: {
     clickable: true
@@ -35,7 +35,7 @@ export const Interactive: Story = {
   args: {
     columns,
     data: sampleData,
-    rowKey: 'id',
+    rowKey: 'id'
   },
   render: (args) => ({
     components: { BaseTable },
@@ -54,6 +54,6 @@ export const Example: Story = {
     columns,
     data: sampleData,
     clickable: false,
-    rowKey: 'id',
+    rowKey: 'id'
   }
 }

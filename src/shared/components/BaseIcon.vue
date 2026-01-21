@@ -16,7 +16,7 @@ import type { IconProps, IconSize } from '@/shared/types/ui-kit/icon'
 
 const props = withDefaults(defineProps<IconProps>(), {
   size: 20,
-  decorative: true,
+  decorative: true
 })
 
 const toCssSize = (value: IconSize) => (typeof value === 'number' ? `${value}px` : value)
@@ -26,7 +26,7 @@ const computedLabel = computed(() => props.ariaLabel ?? props.name)
 const iconStyle = computed(() => ({
   width: toCssSize(props.size),
   height: toCssSize(props.size),
-  color: props.color ?? 'currentColor',
+  color: props.color ?? 'currentColor'
 }))
 
 const svgHtml = computed(() => ICON_SVGS[props.name] ?? '')

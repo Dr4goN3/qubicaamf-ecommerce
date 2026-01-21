@@ -23,7 +23,11 @@
       <div class="cart-item-card__actions">
         <div class="cart-item-card__quantity">
           <span class="cart-item-card__label">{{ t('cart.item.quantity') }}</span>
-          <div class="cart-item-card__quantity-controls" role="group" :aria-label="t('cart.item.quantity')">
+          <div
+            class="cart-item-card__quantity-controls"
+            role="group"
+            :aria-label="t('cart.item.quantity')"
+          >
             <BaseTooltip :text="t('cart.item.decrease')" position="top">
               <BaseButton
                 class="cart-item-card__qty-button"

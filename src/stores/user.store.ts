@@ -23,6 +23,6 @@ export const useUserStore = defineStore('user', () => {
     token,
     isAuthenticated,
     login,
-    logout,
+    logout
   }
 })

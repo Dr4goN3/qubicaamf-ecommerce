@@ -10,8 +10,8 @@ const router = createRouter({
   routes: [
     { path: '/', component: { template: '<div />' } },
     { path: '/categories/:slug', component: { template: '<div />' } },
-    { path: '/:pathMatch(.*)*', component: { template: '<div />' } },
-  ],
+    { path: '/:pathMatch(.*)*', component: { template: '<div />' } }
+  ]
 })
 
 setup((app) => {
@@ -21,7 +21,7 @@ setup((app) => {
 const categories: HeaderCategoryLink[] = [
   { label: 'New', to: '/categories/new' },
   { label: 'Popular', to: '/categories/popular' },
-  { label: 'Accessories', to: '/categories/accessories' },
+  { label: 'Accessories', to: '/categories/accessories' }
 ]
 
 const meta = {
@@ -33,15 +33,15 @@ const meta = {
     logoSrc: { control: 'text' },
     isAuthenticated: { control: 'boolean' },
     cartCount: { control: 'number' },
-    wishlistCount: { control: 'number' },
+    wishlistCount: { control: 'number' }
   },
   args: {
     storeName: 'QubicaAMF Store',
     logoSrc: '',
     isAuthenticated: false,
     cartCount: 0,
-    wishlistCount: 0,
-  },
+    wishlistCount: 0
+  }
 } satisfies Meta<typeof StoreHeader>
 
 export default meta
@@ -53,22 +53,21 @@ export const LoggedOut: Story = {
     setup() {
       return { args, categories }
     },
-    template: '<StoreHeader v-bind="args" :categories="categories" />',
-  }),
+    template: '<StoreHeader v-bind="args" :categories="categories" />'
+  })
 }
 
 export const LoggedIn: Story = {
   args: {
     isAuthenticated: true,
     cartCount: 3,
-    wishlistCount: 2,
+    wishlistCount: 2
   },
   render: (args) => ({
     components: { StoreHeader },
     setup() {
       return { args, categories }
     },
-    template: '<StoreHeader v-bind="args" :categories="categories" />',
-  }),
+    template: '<StoreHeader v-bind="args" :categories="categories" />'
+  })
 }
-
