@@ -27,7 +27,13 @@
             position="bottom"
             :disabled="!isCompactActions"
           >
-	          <BaseButton variant="secondary" :aria-label="t('header.wishlist')">
+	          <BaseButton
+              variant="secondary"
+              :aria-label="t('header.wishlist')"
+              @click="emit('wishlistClick')"
+              class="store-header__action-button"
+              :class="{ 'is-active': isWishlistActive }"
+            >
 	            <BaseIcon name="fav" :size="18" class="store-header__icon" aria-hidden="true" />
               <span class="store-header__action-text">{{ t('header.wishlist') }}</span>
 	            <BaseBadge
@@ -41,7 +47,13 @@
 
           <!-- Cart  -->
 	        <BaseTooltip v-if="isAuthenticated" :text="t('header.cart')" position="bottom" :disabled="!isCompactActions">
-	          <BaseButton variant="secondary" :aria-label="t('header.cart')">
+	          <BaseButton
+              variant="secondary"
+              :aria-label="t('header.cart')"
+              @click="emit('cartClick')"
+              class="store-header__action-button"
+              :class="{ 'is-active': isCartActive }"
+            >
 	            <BaseIcon name="cart" :size="18" class="store-header__icon" aria-hidden="true" />
               <span class="store-header__action-text">{{ t('header.cart') }}</span>
 	            <BaseBadge
@@ -134,9 +146,11 @@ const props = withDefaults(defineProps<HeaderProps>(), {
   isAuthenticated: false,
   cartCount: 0,
   wishlistCount: 0,
+  isCartActive: false,
+  isWishlistActive: false,
 })
 
-const { storeName, logoSrc, categories, isAuthenticated, cartCount, wishlistCount } = toRefs(props)
+const { storeName, logoSrc, categories, isAuthenticated, cartCount, wishlistCount, isCartActive, isWishlistActive } = toRefs(props)
 
 const language = defineModel<Language>('language', { default: LANGUAGE.Italian })
 const theme = defineModel<Theme>('theme', { default: THEME.Light })
@@ -145,6 +159,8 @@ const isCompactActions = useMediaQuery('(max-width: 768px)')
 
 const emit = defineEmits<{
   authClick: []
+  cartClick: []
+  wishlistClick: []
 }>()
 
 function onThemeChange(nextTheme: Theme) {
@@ -254,12 +270,23 @@ function isCategoryActive(categoryLink: HeaderCategoryLink) {
   &__nav-list {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
+    gap: 0;
     flex-wrap: wrap;
     justify-content: center;
     list-style: none;
     padding: 0;
     margin: 0;
+
+    > li {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    > li + li {
+      margin-left: var(--space-3);
+      padding-left: var(--space-3);
+      border-left: 1px solid var(--border);
+    }
   }
 
   &__nav-link {
@@ -296,6 +323,15 @@ function isCategoryActive(categoryLink: HeaderCategoryLink) {
 
   &__icon {
     margin-right: var(--space-2);
+  }
+
+  &__action-button {
+    &.base-button--secondary {
+      &.is-active {
+        background: var(--surface-2);
+        border-color: var(--border-hover);
+      }
+    }
   }
 
   &__action-text {
