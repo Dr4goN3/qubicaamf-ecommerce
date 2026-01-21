@@ -1,15 +1,129 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div class="app-container content-wrapper">
-    <router-view />
+  <div class="app-container">
+    <div class="app-container__inner content-wrapper">
+      <StoreHeader
+        v-model:language="language"
+        v-model:theme="theme"
+        :storeName="'QubicaAMF Ecommerce'"
+        :isAuthenticated="userStore.isAuthenticated"
+        :categories="categories"
+        @authClick="onAuthClick"
+        :cartCount="cartCount"
+        :wishlistCount="wishlistCount"
+      />
+
+      <router-view />
+    </div>
+
+    <LoginDialog v-model="isLoginOpen" v-model:credentials="credentials" @submit="onLoginSubmit" />
+    <LogoutDialog v-model="isLogoutOpen" @confirm="onLogoutConfirm" />
   </div>
 </template>
 
-<style lang="scss">
-  .app-container {
-    padding-top: var(--space-6);
-    padding-bottom: var(--space-6);
-    min-height: 100vh;
+<script setup lang="ts">
+import { computed, onMounted, ref, watch } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useI18n } from 'vue-i18n'
+
+import StoreHeader from '@/core/components/StoreHeader.vue'
+import LoginDialog from '@/core/components/LoginDialog.vue'
+import LogoutDialog from '@/core/components/LogoutDialog.vue'
+
+import { getCategories } from '@/core/services/products.api'
+import { LANGUAGE, type Language } from '@/core/constants/language.constants'
+
+import { useUserStore } from '@/stores/user.store'
+import { useCartStore } from '@/stores/cart.store'
+import { useWishlistStore } from '@/stores/wishlist.store'
+import { useThemeStore } from '@/stores/theme.store'
+
+import type { HeaderCategoryLink } from '@/core/types/header'
+import type { UserCredentials } from '@/shared/types/auth'
+
+const userStore = useUserStore()
+const cartStore = useCartStore()
+const wishlistStore = useWishlistStore()
+const themeStore = useThemeStore()
+
+const { theme } = storeToRefs(themeStore)
+const { count: cartCount } = storeToRefs(cartStore)
+const { count: wishlistCount } = storeToRefs(wishlistStore)
+
+const { locale, t } = useI18n()
+
+const language = computed<Language>({
+  get: () => (locale.value as Language) ?? LANGUAGE.Italian,
+  set: (value) => {
+    locale.value = value
+  },
+})
+
+const categories = ref<HeaderCategoryLink[]>([])
+
+const isLoginOpen = ref(false)
+const isLogoutOpen = ref(false)
+const credentials = ref<UserCredentials>({ username: '', password: '' })
+
+async function loadCategories() {
+  try {
+    const list = await getCategories()
+    categories.value = [
+      { label: t('home.categories.all'), to: '/', category: null },
+      ...list.map((category) => ({
+        label: category,
+        to: `/?category=${encodeURIComponent(category)}`,
+        category,
+      })),
+    ]
+  } catch {
+    categories.value = []
   }
+}
+
+function onAuthClick() {
+  if (userStore.isAuthenticated) {
+    isLogoutOpen.value = true
+    return
+  }
+  isLoginOpen.value = true
+}
+
+async function onLoginSubmit(value: UserCredentials) {
+  await userStore.login(value)
+  isLoginOpen.value = false
+}
+
+function onLogoutConfirm() {
+  userStore.logout()
+  cartStore.clear()
+  wishlistStore.clear()
+  isLogoutOpen.value = false
+}
+
+onMounted(loadCategories)
+
+watch(locale, () => {
+  if (!categories.value.length) {
+    loadCategories()
+    return
+  }
+
+  const first = categories.value[0]
+  if (!first) return
+  categories.value[0] = { label: t('home.categories.all'), to: first.to, category: first.category }
+})
+</script>
+
+<style lang="scss">
+.app-container {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-6);
+  min-height: 100vh;
+}
+
+.app-container__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
 </style>
