@@ -9,3 +9,7 @@ export interface User {
   username: string
   name: Login
 }
+
+export interface UserWithPassword extends User {
+  password: string
+}

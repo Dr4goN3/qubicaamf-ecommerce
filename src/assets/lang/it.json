@@ -7,6 +7,9 @@
     "username": "Username",
     "password": "Password",
     "submit": "Accedi",
+    "demoUserLabel": "Seleziona un utente (demo)",
+    "demoUserPlaceholder": "Seleziona…",
+    "demoUserLoadError": "Impossibile caricare gli utenti.",
     "logoutConfirmTitle": "Logout",
     "logoutConfirmBody": "Sei sicuro di voler effettuare il logout?"
   },

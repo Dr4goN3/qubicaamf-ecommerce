@@ -34,12 +34,19 @@
               class="store-header__action-button"
               :class="{ 'is-active': isWishlistActive }"
             >
-	            <BaseIcon name="fav" :size="18" class="store-header__icon" aria-hidden="true" />
+	            <BaseIcon
+                name="fav"
+                :size="18"
+                :key="wishlistAnimationKey"
+                class="store-header__icon is-wishlist-pop"
+                aria-hidden="true"
+              />
               <span class="store-header__action-text">{{ t('header.wishlist') }}</span>
 	            <BaseBadge
 	              v-if="wishlistCount"
 	              :count="wishlistCount"
-	              class="store-header__badge"
+	              :key="wishlistAnimationKey"
+	              class="store-header__badge is-pulse"
 	              aria-hidden="true"
 	            />
 	          </BaseButton>
@@ -54,12 +61,19 @@
               class="store-header__action-button"
               :class="{ 'is-active': isCartActive }"
             >
-	            <BaseIcon name="cart" :size="18" class="store-header__icon" aria-hidden="true" />
+	            <BaseIcon
+                name="cart"
+                :size="18"
+                :key="cartAnimationKey"
+                class="store-header__icon is-cart-shake"
+                aria-hidden="true"
+              />
               <span class="store-header__action-text">{{ t('header.cart') }}</span>
 	            <BaseBadge
 	              v-if="cartCount"
 	              :count="cartCount"
-	              class="store-header__badge"
+	              :key="cartAnimationKey"
+	              class="store-header__badge is-pulse"
 	              aria-hidden="true"
 	            />
 	          </BaseButton>
@@ -126,7 +140,7 @@
 </template>
 
 <script setup lang="ts">
-import { toRefs } from 'vue'
+import { ref, toRefs, watch } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import { RouterLink, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
@@ -163,6 +177,9 @@ const emit = defineEmits<{
   wishlistClick: []
 }>()
 
+const cartAnimationKey = ref(0)
+const wishlistAnimationKey = ref(0)
+
 function onThemeChange(nextTheme: Theme) {
   theme.value = nextTheme
 }
@@ -181,6 +198,16 @@ function isCategoryActive(categoryLink: HeaderCategoryLink) {
 
   return route.path === categoryLink.to
 }
+
+watch(cartCount, (next, prev) => {
+  if (next === prev) return
+  cartAnimationKey.value += 1
+})
+
+watch(wishlistCount, (next, prev) => {
+  if (next === prev) return
+  wishlistAnimationKey.value += 1
+})
 </script>
 
 <style scoped lang="scss">
@@ -319,10 +346,24 @@ function isCategoryActive(categoryLink: HeaderCategoryLink) {
 
   &__badge {
     margin-left: var(--space-1);
+
+    &.is-pulse {
+      animation: ui-pulse 280ms ease;
+      transform-origin: center;
+    }
   }
 
   &__icon {
     margin-right: var(--space-2);
+
+    &.is-wishlist-pop {
+      animation: ui-pop 260ms ease;
+      transform-origin: center;
+    }
+
+    &.is-cart-shake {
+      animation: ui-shake-x 320ms ease;
+    }
   }
 
   &__action-button {
