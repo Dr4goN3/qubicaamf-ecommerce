@@ -1,4 +1,4 @@
-import type { Product } from './product'
+import type { Product, ProductId, ProductWithRating } from './product'
 
 export type CartId = number
 
@@ -7,6 +7,13 @@ export interface Cart {
   userId: number
   products: Product[]
 }
+
+export interface CartItem {
+  product: ProductWithRating
+  quantity: number
+}
+
+export type CartMap = Record<ProductId, CartItem>
 
 export interface CartProduct extends Product {
   quantity: number

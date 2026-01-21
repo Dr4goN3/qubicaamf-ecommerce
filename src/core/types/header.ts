@@ -1,6 +1,7 @@
 export interface HeaderCategoryLink {
   label: string
   to: string
+  category?: string | null
 }
 
 export interface HeaderProps {
