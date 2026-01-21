@@ -1,4 +1,31 @@
 {
+  "common": {
+    "cancel": "Annulla",
+    "confirm": "Conferma"
+  },
+  "auth": {
+    "username": "Username",
+    "password": "Password",
+    "submit": "Accedi",
+    "logoutConfirmTitle": "Logout",
+    "logoutConfirmBody": "Sei sicuro di voler effettuare il logout?"
+  },
+  "home": {
+    "categories": {
+      "all": "Tutte"
+    },
+    "products": {
+      "loading": "Caricamento prodotti…",
+      "loadError": "Impossibile caricare i prodotti.",
+      "columns": {
+        "product": "Prodotto",
+        "price": "Prezzo"
+      }
+    }
+  },
+  "table": {
+    "selectedRow": "Seleziona riga"
+  },
   "header": {
     "wishlist": "Preferiti",
     "cart": "Carrello",
@@ -14,6 +41,21 @@
     "language": {
       "it": "Italiano",
       "en": "Inglese"
+    }
+  },
+  "product": {
+    "addToCart": "Aggiungi al carrello",
+    "removeFromCart": "Rimuovi dal carrello",
+    "priceLabel": "Prezzo",
+    "descriptionLabel": "Descrizione",
+    "ratingLabel": "Punteggio:",
+    "cart": {
+      "quantityLabel": "Nel carrello: {count}"
+    },
+    "wishlist": {
+      "add": "Aggiungi ai preferiti",
+      "saved": "Salvato nei preferiti",
+      "remove": "Rimuovi dai preferiti"
     }
   }
 }

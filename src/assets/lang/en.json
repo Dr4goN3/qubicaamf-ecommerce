@@ -1,4 +1,31 @@
 {
+  "common": {
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "auth": {
+    "username": "Username",
+    "password": "Password",
+    "submit": "Login",
+    "logoutConfirmTitle": "Logout",
+    "logoutConfirmBody": "Are you sure you want to logout?"
+  },
+  "home": {
+    "categories": {
+      "all": "All"
+    },
+    "products": {
+      "loading": "Loading products…",
+      "loadError": "Failed to load products.",
+      "columns": {
+        "product": "Product",
+        "price": "Price"
+      }
+    }
+  },
+  "table": {
+    "selectedRow": "Select row"
+  },
   "header": {
     "wishlist": "Wishlist",
     "cart": "Cart",
@@ -14,6 +41,21 @@
     "language": {
       "it": "Italian",
       "en": "English"
+    }
+  },
+  "product": {
+    "addToCart": "Add to cart",
+    "removeFromCart": "Remove from cart",
+    "priceLabel": "Price",
+    "descriptionLabel": "Description",
+    "ratingLabel": "Rating:",
+    "cart": {
+      "quantityLabel": "In cart: {count}"
+    },
+    "wishlist": {
+      "add": "Add to wishlist",
+      "saved": "Saved to wishlist",
+      "remove": "Remove from wishlist"
     }
   }
 }
