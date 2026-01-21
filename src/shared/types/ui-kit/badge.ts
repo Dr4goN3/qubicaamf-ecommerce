@@ -1,5 +1,5 @@
 export const BadgeColors = {
-    RED: 'red',
+    RED: 'd23232',
     GREEN: 'green',
     BLUE: 'blue',
     GRAY: 'gray',

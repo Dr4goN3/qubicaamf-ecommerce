@@ -11,4 +11,6 @@ export interface HeaderProps {
   isAuthenticated?: boolean
   cartCount?: number
   wishlistCount?: number
+  isCartActive?: boolean
+  isWishlistActive?: boolean
 }
