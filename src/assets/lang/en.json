@@ -57,5 +57,28 @@
       "saved": "Saved to wishlist",
       "remove": "Remove from wishlist"
     }
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty.",
+    "subtitle": "{count} items · Total {total}",
+    "subtitleDescription": "Here are the items currently in your cart.",
+    "removeConfirm": {
+      "title": "Remove item? | Remove items?",
+      "body": "Are you sure you want to remove \"{title}\" from the cart? This will remove {count} item. | Are you sure you want to remove \"{title}\" from the cart? This will remove {count} items."
+    },
+    "summary": {
+      "title": "Summary",
+      "items": "Items",
+      "total": "Total"
+    },
+    "item": {
+      "price": "Price",
+      "total": "Total",
+      "quantity": "Quantity",
+      "remove": "Remove",
+      "increase": "Increase quantity",
+      "decrease": "Decrease quantity"
+    }
   }
 }

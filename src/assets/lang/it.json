@@ -57,5 +57,28 @@
       "saved": "Salvato nei preferiti",
       "remove": "Rimuovi dai preferiti"
     }
+  },
+  "cart": {
+    "title": "Carrello",
+    "empty": "Il carrello è vuoto.",
+    "subtitle": "{count} articoli · Totale {total}",
+    "subtitleDescription": "Qui trovi gli articoli aggiunti al carrello.",
+    "removeConfirm": {
+      "title": "Rimuovere articolo? | Rimuovere articoli?",
+      "body": "Sei sicuro di voler rimuovere \"{title}\" dal carrello? Verrà rimosso {count} articolo. | Sei sicuro di voler rimuovere \"{title}\" dal carrello? Verranno rimossi {count} articoli."
+    },
+    "summary": {
+      "title": "Riepilogo",
+      "items": "Articoli",
+      "total": "Totale"
+    },
+    "item": {
+      "price": "Prezzo",
+      "total": "Totale",
+      "quantity": "Quantità",
+      "remove": "Rimuovi",
+      "increase": "Aumenta quantità",
+      "decrease": "Diminuisci quantità"
+    }
   }
 }
