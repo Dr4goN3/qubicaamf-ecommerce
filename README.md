@@ -31,6 +31,13 @@ This project includes a minimal PWA setup using `vite-plugin-pwa`:
 - Product API responses are cached at runtime.
 - Auth/login is not supported offline.
 
+### Run as PWA
+
+```bash
+npm run build
+npm run preview
+```
+
 ## Scripts
 
 - Dev server: `npm run dev`
