@@ -1,48 +1,74 @@
-# .
+# QubicaAMF Ecommerce
 
-This template should help get you started developing with Vue 3 in Vite.
+Vue 3 + Vite ecommerce demo using FakeStore API, with Pinia stores, i18n, and Storybook.
 
-## Recommended IDE Setup
+## Requirements
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Node.js: `>=20.19.0 <21` or `>=22.12.0`
+- Recommended for development: Node.js `24.10.0`
+- npm
 
-## Recommended Browser Setup
+## Install the project
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+## Quick start
 
-```sh
+```bash
 npm run dev
+
+# Storybook (optional)
+npm run storybook
 ```
 
-### Type-Check, Compile and Minify for Production
+## PWA (minimal)
 
-```sh
-npm run build
-```
+This project includes a minimal PWA setup using `vite-plugin-pwa`:
 
-### Lint with [ESLint](https://eslint.org/)
+- App shell is available offline after the first load.
+- Product API responses are cached at runtime.
+- Auth/login is not supported offline.
 
-```sh
-npm run lint
-```
+## Scripts
+
+- Dev server: `npm run dev`
+- Production build: `npm run build`
+- Preview build: `npm run preview`
+- Type check: `npm run type-check`
+- Format: `npm run format`
+- Storybook (dev): `npm run storybook`
+- Storybook (build): `npm run build-storybook`
+
+## Tech stack
+
+- UI: Vue 3, Vue Router
+- State: Pinia (+ persistence via VueUse `useLocalStorage`)
+- i18n: `vue-i18n
+- HTTP: Axios (`src/core/services/http.ts`)
+- Component docs: Storybook
+
+## API
+
+This project uses FakeStore API:
+
+- Base URL: `https://fakestoreapi.com`
+- Endpoints/constants: `src/core/services/constants/api.constants.ts`
+
+## Project structure (high level)
+
+- `src/core/`: app-level services, router, core components (header, dialogs)
+- `src/features/`: feature pages and dumb/presentational components (home/product/cart/wishlist)
+- `src/shared/`: shared UI kit components, types, constants, utilities
+
+## Component approach
+
+This project follows a “smart/dumb” split:
+
+- Smart components (containers/views) orchestrate data fetching, routing, and store interactions.
+- Dumb components (presentational) focus on rendering and emit events to the parent.
+
+## Recommended IDE setup
+
+- VS Code

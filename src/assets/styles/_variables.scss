@@ -1,0 +1,89 @@
+@use './breakpoints' as *;
+
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #dfe0e0;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --border-hover: #d1d5db;
+
+  --primary: #111827;
+  --primary-contrast: #ffffff;
+  --danger: #d23232;
+  --danger-contrast: #ffffff;
+  --success: #0f7735;
+  --success-contrast: #ffffff;
+  --warning: #f0b318;
+  --info: #60a5fa;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  // Border radius
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  // Shadows
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+  // Focus ring
+  --focus-ring: 0 0 0 3px rgba(8, 47, 109, 0.5);
+
+  // Transitions
+  --transition-fast: 280ms ease;
+
+  // Layout
+  --container-max: 1280px;
+  --container-padding: var(--space-4);
+
+  --breakpoint-mobile: #{$breakpoint-mobile};
+  --breakpoint-tablet: #{$breakpoint-tablet};
+  --breakpoint-desktop: #{$breakpoint-desktop};
+}
+
+// Dark theme overrides
+[data-theme='dark'] {
+  --bg: #0b1220;
+  --surface: #0f172a;
+  --surface-2: #111c33;
+
+  --text: #e5e7eb;
+  --text-muted: #9ca3af;
+
+  --border: #1f2937;
+  --border-hover: #374151;
+
+  --primary: #e5e7eb;
+
+  --danger: #d23232;
+  --success: #0f7735;
+  --warning: #f0b318;
+  --info: #60a5fa;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+
+  --focus-ring: 0 0 0 3px rgba(96, 165, 250, 0.25);
+}
