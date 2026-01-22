@@ -2,6 +2,7 @@
   "common": {
     "cancel": "Annulla",
     "confirm": "Conferma",
+    "retry": "Riprova",
     "loading": "Caricamento…"
   },
   "auth": {

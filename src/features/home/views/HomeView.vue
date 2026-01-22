@@ -2,7 +2,12 @@
   <main class="home-view">
     <PageHeading :title="t('home.catalog.title')" :subtitle="subtitle" />
 
-    <p v-if="productsError" class="home-view__status">{{ productsError }}</p>
+    <div v-if="productsError" class="home-view__status" role="status">
+      <p class="home-view__status-text">{{ productsError }}</p>
+      <BaseButton variant="secondary" size="sm" @click="retryLoadProducts">
+        {{ t('common.retry') }}
+      </BaseButton>
+    </div>
 
     <div v-else class="home-view__grid">
       <ProductCard
@@ -28,6 +33,7 @@ import { createPriceFormatter } from '@/shared/utils/formatters'
 import { LANGUAGE, type Language } from '@/core/constants/language.constants'
 import ProductCard from '@/features/home/components/ProductCard.vue'
 import PageHeading from '@/shared/components/PageHeading.vue'
+import BaseButton from '@/shared/components/BaseButton.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -66,6 +72,10 @@ function formatPrice(value: number) {
   return priceFormatter.value.format(value)
 }
 
+function retryLoadProducts() {
+  return loadProducts(selectedCategory.value)
+}
+
 watch(selectedCategory, (category) => loadProducts(category), { immediate: true })
 </script>
 
@@ -76,7 +86,14 @@ watch(selectedCategory, (category) => loadProducts(category), { immediate: true 
   gap: var(--space-4);
 
   &__status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
     color: var(--text-muted);
+  }
+
+  &__status-text {
+    margin: 0;
   }
 
   &__grid {

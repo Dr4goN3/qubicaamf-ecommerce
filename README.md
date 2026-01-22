@@ -23,6 +23,14 @@ npm run dev
 npm run storybook
 ```
 
+## PWA (minimal)
+
+This project includes a minimal PWA setup using `vite-plugin-pwa`:
+
+- App shell is available offline after the first load.
+- Product API responses are cached at runtime.
+- Auth/login is not supported offline.
+
 ## Scripts
 
 - Dev server: `npm run dev`
