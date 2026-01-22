@@ -12,6 +12,7 @@ const dirname =
   typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url))
 
 const enableStorybookVitest = process.env.VITEST_STORYBOOK === 'true'
+const repoBase = '/qubicaamf-ecommerce/'
 
 const storybookPlugins = enableStorybookVitest
   ? await storybookTest({
@@ -35,7 +36,8 @@ export default defineConfig(() => {
               manifest: {
                 name: 'QubicaAMF Ecommerce',
                 short_name: 'Ecommerce',
-                start_url: '/',
+                start_url: repoBase,
+                scope: repoBase,
                 display: 'standalone',
                 background_color: '#ffffff',
                 theme_color: '#ffffff',
